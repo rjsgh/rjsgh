@@ -1,0 +1,174 @@
+# 문제 1
+# print("강한친구 대한육군\n강한친구 대한육군")
+
+# 문제 2
+
+# 풀이 1
+# a = int(input())
+# b = int(input())
+# print(a*(b%10))
+# print(a*(b//10%10))
+# print(a*(b//100))
+# print(a*b)
+# 풀이 2
+# x1 = int(input())
+# x2 = int(input())
+
+# x2_1 = x2//10//10
+# x2_2 = x2//10%10
+# x2_3 = x2%10
+
+# x3 = x1*x2_3
+# x4 = x1*x2_2
+# x5 = x1*x2_1
+# x6 = x3+x4*10+x5*100
+
+# print(x3)
+# print(x4)
+# print(x5)
+# print(x6)
+
+# count (해당 알파벳이 문자열에 몇개 있는지)
+'''
+a = 'hobby'
+print(a.count('b'))
+'''
+# find 해당 알파벳이 문자열 몇번째에 있는지
+'''
+b = 'python is the best choic'
+print(b.find('b'))
+'''
+# index   find와 같음.
+'''
+c = 'life is too short'
+print(c.index('t'))
+'''
+# join 사이사이 쉼표 추가
+'''
+print(",".join('abcd'))
+'''
+# upper 대문자로 바꿔줌
+'''
+d = 'hi'
+print(d.upper())
+'''
+# lower 소문자로 바꿔줌
+'''
+e = 'HI'
+print(e.lower())
+'''
+# rstrip 오른쪽 공백 제거
+'''
+f = 'hi '
+print(f)
+print(f.rstrip())
+'''
+# lstrip 왼쪽 공백 제거
+'''
+g = ' hi'
+print(g.lstrip())
+'''
+# strip 양쪽 공백 제거
+'''
+h = ' hi '
+print(h.strip())
+'''
+# replace 문자열 원하는 문자로 바꿀 때 사용(life -> Your leg)
+'''
+i = 'life is too short'
+print(i.replace("life", "Your leg"))
+'''
+# split 문자열 나눌 때 사용
+'''
+j = 'life is too short'
+print(j.split())
+k = 'a:b:c:d'
+print(k.split(":"))
+'''
+
+# 문제 3
+# ticker = 'btc_krw'
+# print(ticker.upper())
+# print(ticker.split('_'))
+
+# 문제 4
+
+# 풀이 1
+# data = '039490      '
+# print(data.split())
+# 풀이 2
+# data = '039490      '
+# print(data.rstrip)
+
+# 조건문 if 조건이 만족할 때 명령어 실행 :뒤에는 한칸 내려가서 띄어쓰기가 됨. 아래 예시들에 안돼 있는건 오류
+'''
+a = int(input())
+b = int(input())
+if a > b: print('a는 b보다 크다')
+'''
+# 비교연산자(<,>,==,!=같지않다,>=,<=방향에 따라서 크거나 같다, 작거나 같다)
+
+# and 조건이 모두 참일 때 참이 된다.
+'''
+a = 6
+b = 4
+if a%2==0 and b%2==0: print('a와 b는 짝수다.')
+'''
+# or or 조건 중 하나만 참이면 참이 된다.
+# not 조건이 거짓이면 참이다.
+# pass 아무것도 출력되지 않음
+'''
+a = 2
+b = 7
+if (a + b > 8): pass
+ print('a와 b의 합은 8보다 크다.')
+'''
+#else문 모든 조건을 만족하지 않을 때
+'''
+if a>b: print("a는 b보다 크다")
+else: print('a는 b보다 작거나 같다')
+'''
+# 돈이 5000원 있으면 택시를 타고, 5000원은 없지만 1000원이 있으면 버스를 타고, 5000원도 없고 1000원도 없으면 걸어 가라.
+
+# money = int(input())
+# if money == 5000: print('taxi')
+# else: if money == 1000 : print('bus')
+# else: print('walk')
+
+#elif 
+
+# if money == 5000: print('taxi')
+# elif money == 1000: print('bus')
+# else: print('walk')
+
+#문제 5
+
+# a = int(input())
+# b = int(input())
+# if a > b:
+#     print('>')
+# elif a < b:
+#     print('<')
+# else:
+#     print('==')
+
+#문제 6
+
+# a = int(input())
+# if 90<=a>=100:
+#     print('A')
+# elif 80<=a>=89:
+#     print('B')
+# elif 70<=a>=79:
+#     print('C')
+# elif 60<=a>=69:
+#     print('D')
+# elif 50<=a>=59:
+#     print('E')
+# else:
+#     print('F')
+
+#문제 7 2753번(백준
+
+# a = int(input())
+# if 
