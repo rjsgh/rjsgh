@@ -398,3 +398,5 @@ for i in range(6):
 #         print("*")
 #     else: #위의 모든 조건들을 만족하지 않는 수 -> 그대로 숫자 출력
 #         print(a)
+
+
