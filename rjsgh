@@ -1,0 +1,1201 @@
+# # def print_kwargs(**kwargs):
+# #     print(kwargs)
+# # print_kwargs(a = 1, b = "banana")
+
+#4673번 셀프 넘버
+# 나(길이가 김. sum과 map 함수를 이용해 줄일 수 있음)
+# def d(n):
+#     a = n
+#     if a < 1001:
+#         a = n + n%10 + n//10
+#     elif a > 1000:
+#         while n != 0:
+#             a =  a + n%10
+#             n = n//10
+#     return a
+# b = []
+# for i in range(0,10000):
+#     b.append(d(i))
+#
+# for i in range(0,10000):
+#     if i not in b:
+#         print(i)
+
+# 풀이
+# def d(n):
+#     n = n+sum(map(int,str(n))) #각 자리마다 더해주는 함수 ; sum(map(int,str(n)))
+#     return n
+#
+# n_self_num = set()  #중복 없애주기. 교집합 합집합.
+# for i in range(1,10001):
+#     n_self_num.add(d(i))
+#
+# for j in range(1,10001):
+#     if j not in n_self_num:
+#         print(j)
+
+#1065 한수
+# 다시 한번 풀어보기
+
+# 나(미완)
+# a = 0
+# def hansoo(n):
+#     if :
+#         n+=1
+#         if n >= 100:
+#             break
+#     print(n)
+#     return a
+# print(hansoo(50))
+
+# 풀이
+# def isHansu(n):
+#     cnt = 0     #count개수
+#     for i in range(1, n+1):
+#         if i <100:
+#             cnt += 1                # 한수의 개수 추가
+#         elif i % 10 - i // 10 % 10 == i // 10 % 10 - i // 10 // 10: #i가 100부터 999까지
+#             # 1의 자리 - 10의 자리 = 10의 자리 - 100의 자리 인 경우 i는 한수 이므로
+#             cnt += 1      # 한수의 개수 추가.
+#     print(cnt)
+# n = int(input())
+# isHansu(n)
+
+#프로그래머스 로또의 최고 순위와 최저 순위
+
+# 나
+#lottos [44, 1, 0, 0, 31, 25] #win_nums [31, 10, 45, 1, 6, 19] 출력 : [3,5]
+# a = 0
+# def solution(lottos, win_nums):
+#     answer = []
+#     return answer
+#
+# lottos = [44, 1, 0, 0, 31, 25]
+# win_nums = [31, 10, 45, 1, 6, 19]
+#
+# if set(lottos)&set(win_nums):
+#     print(set(lottos)&set(win_nums))
+# else:
+#     pass
+
+# 풀이
+# lottos = [44, 1, 0, 0, 31, 25]
+# win_nums = [31, 10, 45, 1, 6, 19]
+# def solution(lottos, win_nums):
+#     ran = [6,6,5,4,3,2,1] #0~1개 맞추면 6위, 2개 맞추면 5위...6개 모두 맞추면 1위
+#     a = len(set(lottos) & set(win_nums)) + lottos.count(0) #최대 맞힌 개수
+#     b = len(set(lottos) & set(win_nums))                   #최소 맞힌 개수
+#     answer =[rank[a],rank[b]]
+#     return answer
+# print()
+
+
+#계산기 만들기
+# class Fourcal:
+#     def __init__(self):
+#         self.result = 0
+#
+#     def add(self,num):
+#         self.result += num
+#         return self.result
+#
+#     def sub(self,num):
+#         self.result -= num
+#         return self.result
+#
+#     def mul(self,num):
+#         self.result *= num
+#         return self.result
+#
+#     def div(self,num):
+#         self.result /= num
+#         return self.result
+# cal1 = Fourcal()
+# print(cal1.add(3))
+# print(cal1.add(4))
+# cal2 = Fourcal()
+# print(cal2.add(2))
+# print(cal2.add(8))
+# cal3 = Fourcal()
+# print(cal3.add(10))
+# print(cal3.sub(2))
+# print(cal3.mul(3))
+# print(cal3.div(4))
+
+#계산기 만들기2
+# class Fourcal:
+    # def __init__(self,first,second):
+    #     self.first = first
+    #     self.second = second
+    #
+    # def add(self):
+    #     result = self.first + self.second
+    #     return result
+    #
+    # def sub(self):
+    #     result = self.first - self.second
+    #     return result
+    #
+    # def mul(self):
+    #     result = self.first * self.second
+    #     return result
+    #
+    # def div(self):
+    #     result = self.first / self.second
+    #     return result
+
+
+# class Fourcal:
+#     def __init__(self):
+#         self.result = 0
+#
+#     def add(self,num):
+#         self.result += num
+#         return self.result
+#
+#     def sub(self,num):
+#         self.result -= num
+#         return self.result
+#
+#     def mul(self,num):
+#         self.result *= num
+#         return self.result
+#
+#     def div(self,num):
+#         self.result /= num
+#         return self.result
+#
+# class MoreFourcal(Fourcal):
+#     def __add__(self, other):
+#         new_cal = MoreFourcal()
+#         new_cal.result = self.result + other.result
+#         return new_cal
+#
+# cal1 = MoreFourcal()
+# cal2 = MoreFourcal()
+# cal1.add(10)
+# cal2.add(3)
+# cal3 = cal1 + cal2
+# print(cal3.result)
+
+
+#클래스의 상속
+
+# class MoreFourcal(Fourcal):
+#     def pow(self):
+#         self.result = self.first ** self.second
+#         return self.result
+#
+#     def add(self):             # 부모 클래스에서 상속받은 기능을 자식 클래스에서 추가적으로 변형시키는 기능(매쏘드 오버라이딩)
+#         return super().add()   # super().add == Fourcal().add()
+#
+#     def __add__(self,other):
+#         new_cal = MoreFourcal()
+#         new_cal.result = self.result + other.result
+#         return new_cal.result
+
+
+# mcal1 = MoreFourcal(10,2)
+# mcal2 = MoreFourcal(3,4)
+# mcal3 = mcal1 + mcal2
+# print(mcal3)
+
+#프로그래머스 없는 숫자 더하기
+# numbers = [1,2,3,4,6,7,8,0]
+# def solution(numbers):
+#     answer = 0
+#     b = []
+#     for i in range(0, 10):
+#         if i not in numbers:
+#             b.append(i)
+#     answer += sum(b)
+#     return answer
+# print(solution(numbers))
+
+#프로그래머스 신규 아이디 추천
+# new_id = "=.="
+# def solution(new_id):
+#     answer = ''
+#     #1번
+#     new_id = new_id.lower()
+#     #2번
+#     for c in new_id:
+#         if c.isalpha() or c.isdigit() or c in ['-','_','.']:   # isalpha,isdigit에 각각 숫자,문자가 들어가면 True
+#             answer += c                                                                # 들어가지 않으면 False가 출력됨
+#     #3번
+#     while '..' in answer:
+#         answer = answer.replace('..','.')
+#     #4번
+#     answer = answer.strip('.')
+#     # if answer[0] == '.':              #
+#     #     answer = answer[1:]
+#     # if answer[-1] == '.':
+#     #     answer = answer[:-1]
+#     #5번
+#     if answer == '':
+#         answer += 'a'
+#     #6번
+#     if len(answer) > 15:
+#         answer = answer[:15]
+#         if answer[-1] == '.':
+#             answer = answer[:-1]
+#     #7번
+#     while len(answer) < 3:
+#         answer += answer[-1]
+#     return answer
+# print(solution(new_id))
+
+#풀이
+# new_id = "=.="
+# def solution(new_id):
+#     answer = ''
+#     #1번
+#     new_id = new_id.lower()
+#     #2번
+#     s_word = "~!@#$%^&*()=+[{]}:?,<>/"
+#     for i in range(len(new_id)):
+#         if new_id[i] not in s_word:
+#             answer += new_id[i]
+#     #3번
+#     while '..' in answer:
+#         answer = answer.replace('..','.')
+#     #4번
+#     answer = answer.strip('.')
+#     #5번
+#     if len(answer) == 0:
+#         answer += 'a'
+#     #6번
+#     if len(answer) >= 16:
+#         answer = answer[:15]
+#         if answer.endswith('.'):
+#             answer = answer[:-1]
+#     #7번
+#     if len(answer) < 3:
+#         while len(answer) < 3:
+#             answer += answer[-1]
+#     return answer
+# print(solution(new_id))
+
+#자료 구조(스택)
+
+# class StackElement:
+#     def __init__(self,data,next):
+#         self.data = data
+#         self.next = next
+
+# class Stack:
+#     #생성자 생성 == 초기값
+#     def __init__(self):
+#         self.top = None
+#
+#     def push(self,data):
+#         if self.top == None:    # stack에 data가 없는 경우
+#             elem = StackElement(data,None)
+#             self.top = elem
+#         else:                   # stack에 data가 1개 이상 있는 경우
+#             elem = StackElement(data,self.top)
+#             self.top = elem
+#     def pop(self):
+#         if self.top == None:        # stack에 data가 없을 때
+#             return None
+#         else:                       # stack에 data가 1개 이상 있을 때
+#             temp = self.top         # temp로 top을 바인딩
+#             self.top = temp.next        # temp의 next를 top으로 바꿔줌 == top의 next 위치를 깔끔하게 뽑아내기 위해서.
+#             return temp.data
+#     def peak(self):
+#         if self.top == None:
+#             return None
+#         else:
+#             return self.top.data
+
+# s1 = Stack()
+# for i in range(1,4):
+#     s1.push(i)
+#     print(s1.peak())
+# for i in range(3):
+#     print(s1.pop())
+
+#백준 10828번 스택
+# N = int(input())
+# class StackElement:
+#     def __init__(self,data,next):
+#         self.data = data
+#         self.next = next
+# class Stack:
+#     def __init__(self):
+#         self.top = None
+#
+#     def push_X(self,data):
+#         if self.top == None:
+#             elem = StackElement(data,None)
+#             self.top = elem
+#         else:
+#             elem = StackElement(data,self.top)
+#             self.top = elem
+#     def pop(self):
+#         if self.top == None:
+#             return -1
+#         else:
+#             temp = self.top
+#             self.top = temp.next
+#             return temp.data
+#     def size(self):
+#         size = 0
+#         for i in range(N):
+#             size += len(self.data)
+#             return size
+#     def empty(self):
+#         if self.top == None:
+#             return 1
+#         else:
+#             return 0
+#     def top(self):
+#         if self.top == None:
+#             return -1
+#         else:
+#             self.top = temp
+#             return temp.data
+# s1 = Stack()
+# s1.push_X(1)
+# s1.push_X(2)
+# s1.push_X(3)
+# print(s1.size())
+# for i in range(N):
+#     input()
+
+#풀이
+# class StackElement:
+#     def __init__(self,data,next):
+#         self.data = data
+#         self.next = next
+# class Stack:
+#     def __init__(self):
+#         self.top = None
+#         self.size = 0
+#     def push(self,data):
+#         if self.top == None:
+#             elem = StackElement(data,None)
+#             self.top = elem
+#             self.size += 1
+#         else:
+#             elem = StackElement(data,self.top)
+#             self.top = elem
+#             self.size += 1
+#
+#     def pop(self):
+#         if self.top == None:
+#             return -1
+#         else:
+#             temp = self.top
+#             self.top = temp.next
+#             self.size -= 1
+#             return temp.data
+#
+#     def peek(self):
+#         if self.top is None:
+#             return -1
+#         else:
+#             return self.top.data
+#
+#     def empty(self):
+#         if self.top == None:
+#             return 1
+#         else:
+#             return 0
+#
+#     def __len__(self):
+#         return self.size
+#
+# N = int(input())
+# s1 = Stack()
+# for i in range(N):
+#     command = input().split()
+#     if command[0] == 'push':
+#         s1.push(command[1])
+#     elif command[0] == 'top':
+#         print(s1.peek())
+#     elif command[0] == 'size':
+#         print(len(s1))
+#     elif command[0] == 'empty':
+#         print(s1.empty())
+#     elif command[0] == 'pop':
+#         print(s1.pop())
+
+#프로그래머스 기능개발
+# progresses = [95, 90, 99, 99, 80, 99]
+# progresses = [93, 30, 5]
+# speeds = [1, 1, 1, 1, 1, 1]
+# speeds = [1, 30, 5]
+# day = [0]
+# answer = []
+#
+# def solution(progresses, speeds):
+#     for i in range(len(progresses)):
+#         day.insert(i+1,0)
+#         answer.insert(i,0)
+#         if day[i] >= day[i+1]:
+#             answer[0] += 1
+#         while True:
+#             if progresses[i] >= 100:
+#                 answer.insert(i, 0)
+#                 break
+#             else:
+#                 progresses[i] += speeds[i]
+#                 day[i] += 1
+#     for i in range(len(answer)):
+#         if 0 in answer:
+#             answer.remove(0)
+#     day.remove(0)
+#     return answer
+# print(solution(progresses,speeds))
+
+#풀이
+# def solution(progresses,speeds):
+#     #기능별로 배포 까지 걸리는 기간 구하기
+#     terms = []      #기간들
+#     for i in range(len(progresses)):
+#         cnt = 0             #걸리는 일 수
+#         while progresses[i] < 100:              #기능이 100프로가 될 때까지
+#             progresses[i] += 1*speeds[i]        #기능 += 속도
+#             cnt += 1                        #하루가 지남
+#         terms.append(cnt)
+#     terms.reverse()                     #7일 걸리는 기능이 먼저 나가기 때문에 역순으로 만듬
+#
+#     top = terms.pop()           #top = 배포되는 날
+#     cnt = [1]                   #배포 되는날에 완성되는 기능의 개수
+#     while terms:                #남아있는 기능이 없을 때 까지
+#         elem = terms.pop()      #배포되는 날의 기능과 비교할 기능
+#         if elem <= top:         #비교할 기능이 배포되는 날의 기능보다 전날에 완성되면 배포할 기능의 개수 증가
+#             cnt[-1] += 1
+#         else:
+#             top = elem          #배포되는날은 다음기능이 완성이 되는날이 되고
+#             cnt.append(1)       #같은 날 배포될 기능의 개수를 초기화(=1)
+#
+#     answer = cnt
+#     return answer
+
+#queue(큐)
+# a = []
+# a.append(1)
+# a.append(2)
+# a.append(3)
+# print(a)
+# print(a.pop(0))
+# print(a.pop(0))
+# print(a.pop(0))
+# class QueueElement:
+#     def __init__(self,data,next):
+#         self.data = data
+#         self.next = next
+#
+# class Queue:
+#     def __init__(self):
+#         self.front = None
+#         self.rear = None
+#     def enqueue(self,data):
+#         if self.front == None:         #Queue안에 element가 없는 경우
+#             elem = QueueElement(data,None)
+#             self.rear = elem
+#             self.front = elem
+#         else:                           #Queue안에 element가 있는 경우
+#             elem = QueueElement(data,None)
+#             self.rear.next = elem
+#             self.rear = elem
+#
+#     def dequeue(self):
+#         if self.front == None:
+#             return None
+#         else:
+#             data = self.front.data
+#             self.front = self.front.next
+#             return data
+#     def reverse(self):
+#         prev = None
+#         curr = self.front
+#         while curr:
+#             next = curr.next
+#             curr.next = prev
+#             prev = curr
+#             curr = next
+#         self.front,self.rear = self.rear,self.front
+#
+#
+#
+#
+# q1 = Queue()
+#
+# for i in range(1,11):
+#     q1.enqueue(i)
+#
+# q1.reverse()
+# for i in range(10):
+#     print(q1.dequeue())
+
+#프로그래머스 2016년
+# a = 5
+# b = 24
+# c = ['THU','FRI','SAT','SUN','MON','TUE','WED']
+# d = [31,29,31,30,31,30,31,31,30,31,30,31]
+# def solution(a, b):
+#     answer = ''
+
+#풀이
+# a = 5
+# b = 24
+# def solution(a,b):
+#     answer = ''
+#     day = ['THU','FRI','SAT','SUN','MON','TUE','WED']
+#     mon = [31,29,31,30,31,30,31,31,30,31,30,31]
+#     total_day = 0
+#
+#     for i in range(a - 1):
+#         total_day += mon[i]
+#
+#     answer = day[(total_day + b) % 7]
+#     return  answer
+# print(solution(a,b))
+#프로그래머스 체육복
+# n = 5
+# n = 3
+# lost = [2, 4]
+# lost = [3]
+# reserve = [1, 3, 5]
+# reserve = [3]
+# reserve = [1]
+
+#
+# def solution(n, lost, reserve):
+#     answer = 0
+#     set1 = set(reserve) - set(lost)
+#     set2 = set(lost) - set(reserve)
+#     n -= len(set2)
+#     if len(set2) < len(set1):
+#         a = len(set1) - len(set2)
+#         b = len(set1) - a
+#         c = b + n
+#         answer += c
+#     elif len(set2) > len(set1):
+#         n += len(set1)
+#         answer += n
+#     elif len(lost) == len(set1):
+#         n += len(set2)
+#         answer += n
+#     return answer
+# print(solution(n,lost,reserve))
+
+# def solution(n,lost,reserve):
+#     answer = 0
+#     a = 1
+#     reserve_set = set(reserve) - set(lost)
+#     reserve_ = list(reserve_set)
+#     lost_set = set(lost) - set(reserve)
+#     lost_ = list(lost_set)
+#     n = n-len(lost_)
+#     answer += n
+#     while reserve_:
+#         if reserve_[0] == a:
+#             if a-1 in lost_:
+#                 answer += 1
+#                 lost_.remove(a-1)
+#             elif a+1 in lost_:
+#                 answer += 1
+#                 lost_.remove(a+1)
+#             else:
+#                 pass
+#             reserve_.remove(a)
+#         elif reserve_[0] != a:
+#             a += 1
+#         if reserve_ == [] or lost_ == []:
+#             break
+#     return answer
+# print(solution(n,lost,reserve))
+
+#풀이
+
+#틀림
+# def solution(n, lost, reserve):
+#     answer = 0
+#     x = [1] * n  # 학생수 만큼 리스트에 1 생성
+#     # 인덱스번호+1은 학생 번호
+#     # 값 1은 학생당 가진 체육복 수
+#     for i in range(1, n + 1):
+#         if i in lost:  # i가 lost에 있으면 잃어버린학생이므로
+#             x[i - 1] -= 1  # x리스트에서 1을 0으로 만들어준다
+#         elif i in reserve:  # i가 reserve에 있으면 여분이 있으므로
+#             x[i - 1] += 1  # 1을 2로
+#
+#     for i in range(n):
+#         if x[i] == 0:
+#             if i >= 1 and x[i - 1] == 2:
+#                 x[i] += 1
+#                 x[i - 1] -= 1
+#             elif i <= n - 2 and x[i + 1] == 2:
+#                 x[i] += 1
+#                 x[i + 1] -= 1
+#
+#     for i in range(n):
+#         if x[i] >= 1:
+#             answer += 1
+#
+#     return answer
+# print(n,lost,reserve)
+
+#수정
+# def solution(n, lost, reserve):
+#     answer = 0
+#     x = [1] * n
+#
+#     for i in range(1, n + 1):
+#         if i in lost:
+#             x[i - 1] -= 1
+#         if i in reserve:
+#             x[i - 1] += 1
+#
+#     for i in range(n):
+#         if x[i] == 0:
+#             if i >= 1 and x[i - 1] == 2:
+#                 x[i] += 1
+#                 x[i - 1] -= 1
+#             elif i <= n - 2 and x[i + 1] == 2:
+#                 x[i] += 1
+#                 x[i + 1] -= 1
+#
+#     for i in range(n):
+#         if x[i] >= 1:
+#             answer += 1
+#
+#     return answer
+
+# def solution(n, lost, reserve):
+#     # 여벌을 가진 학생 중 도난 당한 학생들을 리스트에서 제외
+#     reserve2 = list(set(reserve) - set(lost))
+#     lost2 = list(set(lost) - set(reserve))
+#
+#     # 확실하게 체육복을 가직 사람
+#     answer = n - len(lost2)
+#     for l in lost2:
+#         # 잃어버린 사람의 앞 번호가 여벌을 가진 경우
+#         if l - 1 in reserve2:
+#             answer += 1
+#             reserve2.remove(l - 1)
+#         # 잃어버린 사람의 뒷번호가 여벌을 가진 경우
+#         elif l + 1 in reserve2:
+#             answer += 1
+#             reserve2.remove(l + 1)
+#
+#     return answer
+
+#deque(덱)
+# class DequeElement:
+#     def __init__(self,data,left,right):
+#         self.data = data
+#         self.left = left
+#         self.right = right
+#
+# class Deque:
+#     def __init__(self):
+#         self.rear = None
+#         self.front = None
+#
+#     def insert_rear(self,data):
+#         elem = DequeElement(data,None,self.rear)
+#         if self.rear is None:
+#             self.rear = elem
+#             self.front = elem
+#         else:
+#             self.rear.left = elem
+#             self.rear = elem
+#
+#     def insert_front(self,data):
+#         elem = DequeElement(data,self.front,None)
+#         if self.front is None:
+#             self.rear = elem
+#             self.front = elem
+#         else:
+#             self.front.right = elem
+#             self.front = elem
+#
+#
+#     def delete_rear(self):
+#         if self.rear is None:
+#             return None
+#         else:
+#             data = self.rear.data
+#             if self.rear == self.front:
+#                 self.rear = self.front = None
+#             else:
+#                 self.rear = self.rear.right
+#                 self.rear.left = None
+#             return data
+#
+#     def delete_front(self):
+#         if self.front is None:
+#             return None
+#         data = self.front.data
+#         if self.front == self.rear:
+#             self.front = self.rear = None
+#         else:
+#             self.front = self.front.left
+#             self.front.right = None
+#         return data
+#
+#     def reverse(self):
+#         curr = self.rear
+#         while curr:
+#             curr.left, curr.right = curr.right, curr.left
+#             curr = curr.left
+#         self.rear, self.front = self.front, self.rear
+#
+#
+# dq = Deque()
+# for i in range(1,6):
+#     dq.insert_rear(i)
+#     dq.insert_front(-i)
+# dq.reverse()
+# for j in range(10):
+#     print(dq.delete_front())
+
+#백준 N과 M(1)
+# N,M = map(int, input().split())
+# list = []
+# answer = []
+# a = -1
+# b = 0
+# c = 0
+# d = -2
+# e = 1
+# while True:
+#     if b == N:
+#         b = 1
+#     else:
+#         b += 1
+#     for i in range(M):
+#         list.insert(i,0)
+#     if M == 1:
+#         list[a] += b
+#     elif M == 2:
+#         list[-1] += b
+#         list[-2] += c
+#         if list[-1] == N:
+#             c += 1
+#             if c > N:
+#                 c = 1
+    # else:
+    #     list[-1] += b
+    #     if list[-1] == N:
+    #         list[d] += e
+    #         e += 1
+    #         if e == N:
+    #             e = 1
+    #         if list[d] == N:
+    #             d -= 1
+    #             list[d] += e
+    #             d = -2
+    #     else:
+    #         pass
+    #     list[a-1] += c
+    #     if list[a] == N:
+    #         c += 1
+    #         if c > N:
+    #             c = 1
+    #             a -= 1
+    # list_set = set(list)
+    # if len(list) != len(list_set):
+    #     pass
+    # elif list.count(0):
+    #     pass
+    # else:
+    #     for j in range(len(list)):
+    #         answer.insert(j, str(list[j]))
+    #     print(' '.join(answer))
+    # if list.count(N) == len(list):
+    #     break
+    # list.clear()
+    # answer.clear()
+
+
+
+#Binary tree
+#구조
+#node
+#rootnode (뿌리)
+
+# class TreeNode:
+#     def __init__(self,data,left,right):
+#         self.data = data
+#         self.left = left
+#         self.right = right
+# class BinaryTree:
+#     def __init__(self):
+#         self.root = None
+#
+#     def insert(self,data):  #삽입
+#         node = TreeNode(data,None,None)     #node는 새로운 노드
+#         if self.root is None:   #루트가 비어 있으면 n이 루트가 된다.
+#             self.root = node
+#             return
+#         #트리가 비어있지 않는 경우
+#         curr = self.root    #루트를 현위치로 바인딩하고
+#         while True:
+#             if data >= curr.data:       #새로운 데이터 값이 현위치의 값보다 작으면
+#                 if curr.right is None:      #바뀐 현위치가 비어있으면
+#                     curr.right = node       #새로운 노드는 부모 노드의 왼쪽에 링크 시켜 준다.
+#                     return
+#                 curr = curr.right
+#             else:
+#                 if curr.left is None:
+#                     curr.left = node
+#                     return
+#                 curr = curr.left
+#
+#     def find(self,data):
+#         curr = self.root
+#         while curr:
+#             if curr.data == data:
+#                 return True
+#             elif curr.data < data:
+#                 curr = curr.right
+#             else:
+#                 curr = curr.left
+#         return False
+#
+#     def delete(self,data):
+#         parent = None       #현재 노드의 부모
+#         curr = self.root    #현재 노드
+#         while curr:
+#             if curr.data == data:
+#                 #삭제하려는 노드의 자식 노트가 없을 경우
+#                 if curr.right is None and curr.left is None:
+#                     if parent.left == curr:
+#                         parent.left = None
+#                     else:
+#                         parent.right = None
+#                 #삭제하려는 노드의 자식 노드가 하나인 경우
+#                 elif curr.right is None and curr.left is not None:
+#                     if parent.left == curr:
+#                         parent.left = curr.left
+#                     else:
+#                         parent.right = curr.left
+#                 elif curr.right is not None and curr.left is None:
+#                     if parent.left == curr:
+#                         parent.left = curr.right
+#                     else:
+#                         parent.right = curr.right
+#                 #삭제하려는 노드의 자식 노드가 두개인 경우(왼쪽 서브트리의 제일 오른쪽 값을 삭제할 노드의 위치로 복사)
+#                 else:
+#                     #후속자를 찾는 과정
+#                     ret_data = curr.data    #리턴할 삭제값 저장
+#                     succ_p = None           #후속자의 부모
+#                     succ = curr.left        #후속자를 삭제할 값의 왼쪽 서브트리에서 찾는다
+#                     while succ.right is not None:
+#                         succ_p = succ
+#                         succ = succ.right
+#                     curr.data = succ.data   #삭제할 노드의 위치에 후속자의 값 복사
+#                     succ_p.right = succ.left    #후속자와 후속자 부모의 연결을 끊고 왼쪽 자식을 연결해준다(None일 경우도 있다)
+#                     return ret_data
+#                 return curr.data
+#             elif curr.data < data:
+#                 parent = curr
+#                 curr = curr.right
+#             else:
+#                 parent = curr
+#                 curr = curr.left
+#         return None
+
+#이진탐색(Binary Search)
+# def binary_search(list_a,data):
+#     left = 0
+#     right = len(list_a) - 1
+#     while left <= right:
+#         mid = (left + right) // 2
+#         if data == list_a[mid]:
+#             return 1
+#         elif data > list_a[mid]:
+#             left = mid + 1
+#         else:
+#             right = mid - 1
+#     return 0
+#
+# n = int(input())
+# a = list(map(int, input().split()))
+# a.sort()            #중요
+# m = int(input())
+# b = list(map(int,input().split()))
+#
+# for i in range(m):
+#     print(binary_search(a,b[i]))
+
+#프로그래머스 같은 숫자는 싫어
+#시간초과
+# arr = [1,1,3,3,0,1,1]
+# def solution(arr):
+#     answer = []
+#     arr.append(0)
+#     for i in range(len(arr)):
+#         for j in range(len(arr)):
+#             if arr[i] == j and arr[i+1] == j:
+#                 pass
+#             elif arr[i] == j:
+#                 answer.append(j)
+#     return answer
+# print(solution(arr))
+# arr = [1,1,3,3,0,1,1]
+# def solution(arr):
+#     answer = []
+#     answer.append(arr[0])
+#     for i in range(1,len(arr)):
+#         if arr[i] != arr[i-1]:
+#             answer.append(arr[i])
+#     return answer
+# print(solution(arr))
+
+# #pygame
+# import pygame
+# import random
+# from datetime import datetime
+# from datetime import timedelta
+#
+#
+#
+# # 스크린과 한 픽셀의 크기를 정의
+# SCREEN_WIDTH = 400
+# SCREEN_HEIGHT = 400
+# BLOCK_SIZE = 20     # 화면 크기의 픽셀을 정의
+#
+# # 뱀 게임에 사용할 색상을 정의
+# # rgb의 단위가 255인 이유 = 1byte가 표현할 수 있는 최대 값이 255 이기 때문
+# RED = (255, 0, 0)     # 사과에 사용할 색
+# GREEN = (0, 255, 0)     # 뱀에 사용할 색
+# WHITE = (255, 255, 255) # 배경에 사용할 색
+# GRAAY = (127, 127, 127) # 배경에 사용할 색
+#
+# # pygame 모듈 초기화
+# pygame.init()
+#
+# # screen 생성
+# screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+#
+# # 배경을 그리는 함수 정의
+# def draw_background(screen):
+#     # 좌표상의 직사각형 공간을 정의 후 draw.rect를 통해 그린다.
+#     background = pygame.Rect((0, 0), (SCREEN_WIDTH, SCREEN_HEIGHT))
+#     pygame.draw.rect(screen, WHITE, background)
+#
+# # 블록(픽셀)을 그리는 함수 정의
+# def draw_block(screen, color, position):
+#     block = pygame.Rect((position[0] * BLOCK_SIZE, position[1] * BLOCK_SIZE),(BLOCK_SIZE, BLOCK_SIZE))
+#     pygame.draw.rect(screen, color, block)
+#
+# # 뱀이 움직이는 방향에 대한 오프셋
+# class Offset:
+#     NONE = [0, 0]
+#     RIGHT = [1, 0]
+#     LEFT = [-1, 0]
+#     UP = [0, -1]
+#     DOWN = [0, 1]
+#
+# # 뱀의 위치와 방향, 색을 정의하는 클래스
+# class Snake:
+#     # 생성시 뱀의 색상과 위치, 초기에 움직일 방향을 입력
+#     def __init__(self, color, position, offset):
+#         self.color = color
+#         self.offset = offset
+#         # 머리 ~ 꼬리의 위치들
+#         self.positions = [
+#             position,
+#             [position[0], position[1] + 1],
+#             [position[0], position[1] + 2],
+#             [position[0], position[1] + 3]
+#         ]
+#
+#     # 뱀을 그리는 함수
+#     def draw(self):
+#         for position in self.positions:
+#             draw_block(screen, self.color, position)
+#
+#     # 뱀을 움직이는 함수 - 꼬리가 머리를 따라가게 함
+#     def move(self):
+#         #현재 위치를 기억
+#         now_pos = [self.positions[0][0], self.positions[0][1]]
+#         # 머리를 오프셋만큼 이동
+#         self.positions[0][0] += self.offset[0]
+#         self.positions[0][1] += self.offset[1]
+#         # 마지막 위치를 기억
+#         last_pos = now_pos
+#         for i in range(1, len(self.positions)):
+#             now_pos = [self.positions[i][0], self.positions[i][1]]
+#             self.positions[i] = last_pos
+#             last_pos = now_pos
+#
+#     # 뱀의 꼬리 길이를 한칸 늘리는 함수
+#     def grow(self):
+#         self.positions.append([self.positions[-1][0], self.positions[-1][1]])
+#
+# # 뱀의 머리(점수)인 사과의 색과 위치를 정의하는 클래스
+# class Apple:
+#     # 생성시 사과의 위치와 색상을 입력한다.
+#     def __init__(self, color, position):
+#         self.color = color
+#         self.position = position
+#
+#     # 사과를 그리는 함수
+#     def draw(self):
+#         draw_block(screen, self.color, self.position)
+#
+#     # 사과를 랜덤한 위치로 이동 시키는 함수
+#     def random_move(self):
+#         self.position = [random.randint(0, 19), random.randint(0, 19)]
+#
+#
+# # 게임을 정의하는 클래스
+# class Game:
+#     # 생성시 뱀과 사과의 인스턴스를 생성한다.
+#     def __init__(self):
+#         self.snake = Snake(GREEN, [9, 9], Offset.NONE)
+#         self.apple = Apple(RED, [3, 3])
+#
+#     # 배경과 생성된 인스턴스들을 그리는 함수 (배경보다 뱀이 먼저 생성되면 뱀은 배경에 가려진다)
+#     def draw(self):
+#         draw_background(screen)
+#         self.snake.draw()
+#         self.apple.draw()
+#         pygame.display.update()     # 그려진 내용이 반영되도록 업데이트를 합시다.
+#
+#     # 게임을 진행하는 함수
+#     def start(self):
+#         last_movement = datetime.now()  # 시간이 흐름을 표현하기 위해 만든 변수 (뱀의 움직임을 표현할 때 사용)
+#         keydown_flag = False        # 키가 눌림 상태인지 확인하는 플래그
+#
+#         while True:
+#             events = pygame.event.get() #게임의 이벤트 현상을 받는다
+#             for event in events:
+#                 if event.type == pygame.QUIT:
+#                     exit()
+#                 elif event.type == pygame.KEYDOWN and not keydown_flag:
+#                     if event.key == pygame.K_RIGHT and self.snake.offset != Offset.LEFT:
+#                         self.snake.offset = Offset.RIGHT
+#                         keydown_flag = True
+#                     elif event.key == pygame.K_LEFT and self.snake.offset != Offset.RIGHT:
+#                         self.snake.offset = Offset.LEFT
+#                         keydown_flag = True
+#                     elif event.key == pygame.K_UP and self.snake.offset != Offset.DOWN:
+#                         self.snake.offset = Offset.UP
+#                         keydown_flag = True
+#                     elif event.key == pygame.K_DOWN and self.snake.offset != Offset.UP:
+#                         self.snake.offset = Offset.DOWN
+#                         keydown_flag = True
+#
+#             if self.snake.positions[0] == self.apple.position:
+#                 # 사과를 없애고 새로운 위치에 생성
+#                 # 뱀의 길이를 한칸 늘려줌
+#                 self.apple.random_move()
+#                 self.snake.grow()
+#             # TODO: 뱀이 꼬리나 벽에 충돌했을 때 처리
+#             # if self.snake.positions[0] in self.snake.positions[1:] or self.snake.positions[0][0] == 0 or self.snake.positions[0][0] == 400 or self.snake.positions[0][1] == 0 or self.snake.positions[0][1] == 400:
+#             #     quit()
+#
+#
+#             if timedelta(milliseconds=300) <= datetime.now() - last_movement:
+#                 self.snake.move()
+#                 last_movement = datetime.now()
+#                 keydown_flag = False
+#
+#             self.draw()   # 게임의 모든 인스턴스를 그린다.
+#
+# game = Game()
+# game.start()
+
+#프로그래머스 나머지가 1이 되는 수 찾기
+# n = 12
+# def solution(n):
+#     x = 0
+#     l = []
+#     answer = 0
+#     for i in range(n):
+#         x += 1
+#         if n % x == 1:
+#             l.append(x)
+#     l.sort(reverse=True)
+#     answer += l.pop()
+#     return answer
+# print(solution(n))
+
+#프로그래머스 부족한 금액 계산하기
+# price = 3
+# money = 20
+# count = 4
+# def solution(price, money, count):
+#     b = 0
+#     answer = 0
+#     for i in range(count):
+#         a = price * (i + 1)
+#         b += a
+#     if b > money:
+#         answer += (b - money)
+#         return answer
+#     elif b <= money:
+#         return answer
+# print(solution(price,money,count))
+
+#백준 11654번 아스키코드
+# user = input()
+# print(ord(user))
+
+#백준 11720번 숫자의 합
+# a = int(input())
+# b = input()
+# answer = 0
+# for i in range(a):
+#     c = ','.join(b)
+#     d = c.split(',')
+#     answer += int(d.pop(i))
+# print(answer)
+
+#백준 10809번 알파벳 찾기
+# a = input()
+# for i in range(97,123):
+#     answer = a.find(chr(i))
+#     print(answer,end=' ')
+
+#백준 2675번 문자열 반복
+# s = int(input())
+
+# for i in range(s):
+#     r, p = map(str, input().split())
+#     for i in p:
+#         print(i*int(r),end='')
+#     print()
+
+#백준 1157번 단어 공부
+# a = input()
+# a.lower()
+# c = []
+# e = []
+# for i in a:
+#     c.append(a.find(i))
+# a = list(a)
+# c = list(set(c))
+# for j in range(len(c)):
+#     d = a[c[j]]
+#     e.append(a.count(d))
+# for j in a:
+#     # print(j)
+#     print(a.count(j))
+
+#풀이
+# a = input()
+# a = a.lower()
+# s_a = list(set(a))
+# cnt = []
+# for i in s_a:
+#     cnt.append(a.count(i))
+#
+# if cnt.count(max(cnt)) >= 2:
+#     print('?')
+# else:
+#     print(s_a[cnt.index(max(cnt))].upper())
+
+#백준 1152번 단어의 개수
+# a = input()
+# l_a = list(a.split())
+# print(len(l_a))
