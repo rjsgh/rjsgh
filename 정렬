@@ -99,3 +99,7 @@ def bouble_sort(list_a):
 #     a.append(int(input()))
 # for i in bouble_sort(a):
 #     print(i)
+
+#백준 1427번 소트인사이드
+a = int(input())
+
