@@ -1,0 +1,117 @@
+from tkinter import *
+from tkinter.ttk import *
+from main import *
+
+# from main import IntCalc
+root = Tk()
+root.title('Test program')
+root.geometry('450x240')
+
+frm = Frame(root)
+frm.pack(expand=True)
+ent = Entry(frm, font='맑은고딕 15')
+
+ent.grid(column=0, row=0,columnspan=4 ,sticky='wens')
+btnp = Button(frm, text='+')
+btnp.grid(column=3, row=1, padx=5, pady=5, sticky='wens')
+btnm = Button(frm, text='-')
+btnm.grid(column=3, row=2, padx=5, pady=5, sticky='wens')
+btnmul = Button(frm, text='*')
+btnmul.grid(column=3, row=3, padx=5, pady=5, sticky='wens')
+btndiv = Button(frm, text='/')
+btndiv.grid(column=3, row=4, padx=5, pady=5, sticky='wens')
+btn7 = Button(frm, text='7')
+btn7.grid(column=0, row=1, padx=5, pady=5, sticky='wens')
+btn8 = Button(frm, text='8')
+btn8.grid(column=1, row=1, padx=5, pady=5, sticky='wens')
+btn9 = Button(frm, text='9')
+btn9.grid(column=2, row=1, padx=5, pady=5, sticky='wens')
+btn4 = Button(frm, text='4')
+btn4.grid(column=0, row=2, padx=5, pady=5, sticky='wens')
+btn5 = Button(frm, text='5')
+btn5.grid(column=1, row=2, padx=5, pady=5, sticky='wens')
+btn6 = Button(frm, text='6')
+btn6.grid(column=2, row=2, padx=5, pady=5, sticky='wens')
+btn1 = Button(frm, text='1')
+btn1.grid(column=0, row=3, padx=5, pady=5, sticky='wens')
+btn2 = Button(frm, text='2')
+btn2.grid(column=1, row=3, padx=5, pady=5, sticky='wens')
+btn3 = Button(frm, text='3')
+btn3.grid(column=2, row=3, padx=5, pady=5, sticky='wens')
+btnd = Button(frm, text='del')
+btnd.grid(column=0, row=4, padx=5, pady=5, sticky='wens')
+btn0 = Button(frm, text='0')
+btn0.grid(column=1, row=4, padx=5, pady=5, sticky='wens')
+btne = Button(frm, text='=')
+btne.grid(column=2, row=4, padx=5, pady=5, sticky='wens')
+
+btn1.configure(command=lambda: ent.insert('end', '1'))
+btn2.configure(command=lambda: ent.insert('end', '2'))
+btn3.configure(command=lambda: ent.insert('end', '3'))
+btn4.configure(command=lambda: ent.insert('end', '4'))
+btn5.configure(command=lambda: ent.insert('end', '5'))
+btn6.configure(command=lambda: ent.insert('end', '6'))
+btn7.configure(command=lambda: ent.insert('end', '7'))
+btn8.configure(command=lambda: ent.insert('end', '8'))
+btn9.configure(command=lambda: ent.insert('end', '9'))
+btn0.configure(command=lambda: ent.insert('end', '0'))
+
+btnd.configure(command=lambda: ent.delete(0, 'end'))
+# btne.configure(command=lambda: ent.insert('end', '='))
+btnp.configure(command=lambda: ent.insert('end', '+'))
+btnm.configure(command=lambda: ent.insert('end', '-'))
+btnmul.configure(command=lambda: ent.insert('end', '*'))
+btndiv.configure(command=lambda: ent.insert('end', '/'))
+
+# 입력 함수를 정의 후 사용.
+def input_expr(txt: str):
+    expr = ent.get()       # Entry의 수식을 가져옴
+    if len(expr) > 0 and expr[-1] in ('+', '-', '*', '/') and txt in ('+', '-', '*', '/'):
+        lexpr = list(expr)
+        lexpr[-1] = txt
+        expr = ''.join(lexpr)
+    elif len(expr) == 0 and txt in ('+', '-'):
+        expr += '0' + txt
+
+    else:
+        expr += txt             # 수식에 추가되는 문자를 붙임
+    ent.delete(0, 'end')   # Entry의 기존 수식을 전부 지움
+    ent.insert(0, expr)    # 새로운 수식을 Entry에 넣어줌
+
+# 계산한 결과 값을 ent에 출력하는 함수
+def get_result():
+    expr = ent.get()
+    if len(ent.get()) == 0:
+        return
+    if expr[-1] in ('+', '-', '*', '/'):
+        expr = expr[:-1]
+    calc = IntCalc()
+    calc.set_expression(expr)
+    ent.delete(0,'end')
+    return calc.evaluation()
+
+
+
+
+btn0.configure(command=lambda: input_expr('0'))
+btn1.configure(command=lambda: input_expr('1'))
+btn2.configure(command=lambda: input_expr('2'))
+btn3.configure(command=lambda: input_expr('3'))
+btn4.configure(command=lambda: input_expr('4'))
+btn5.configure(command=lambda: input_expr('5'))
+btn6.configure(command=lambda: input_expr('6'))
+btn7.configure(command=lambda: input_expr('7'))
+btn8.configure(command=lambda: input_expr('8'))
+btn9.configure(command=lambda: input_expr('9'))
+btnp.configure(command=lambda: input_expr('+'))
+btnm.configure(command=lambda: input_expr('-'))
+btnmul.configure(command=lambda: input_expr('*'))
+btndiv.configure(command=lambda: input_expr('/'))
+btne.configure(command=lambda: ent.insert('end', get_result()))
+
+
+
+
+
+
+root.mainloop()
