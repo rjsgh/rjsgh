@@ -58,14 +58,16 @@ class Sockserver:
             print(address, "에서 연결")
 
     # 클라이언트 소켓에 데이터 전송
-    def send(self):
-        while True:
-            msg = input()
-            for c in self.clients:
-                try:
-                    c.send(bytes(msg, encoding='utf8'))
-                except socket.timeout:
-                    continue
+    def send(self, msg):
+        for c in self.clients:
+            try:
+                c.send(bytes(msg, encoding='utf8'))
+            except socket.timeout:
+                continue
+            except ConnectionResetError:
+                continue
+            except ConnectionAbortedError:
+                continue
     # 클라이언트 소켓으로 부터 데이터 수신
     def recv(self):
         while True:
@@ -74,19 +76,22 @@ class Sockserver:
                     data = c.recv(255)
                     msg = data.decode(encoding='utf8')
                     print(msg)
+                    self.send(msg)
                 except socket.timeout:
                     continue
+                except ConnectionResetError:
+                    del c
+                except ConnectionAbortedError:
+                    del c
 
     # 통신 시작 함수
     def communicate(self):
         # 각각의 스레드 생성
         t_accept = threading.Thread(target=self.accept, daemon=True)
-        t_send = threading.Thread(target=self.send, daemon=True)
         t_recv = threading.Thread(target=self.recv, daemon=True)
 
         # 스레드 시작
         t_accept.start()
-        t_send.start()
         t_recv.start()
 
         # 프로그램 종료 방지
@@ -95,4 +100,3 @@ class Sockserver:
 
 server = Sockserver('127.0.0.1', 3000)
 server.communicate()
-
