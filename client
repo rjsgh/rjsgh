@@ -24,27 +24,17 @@ class SockClient:
         self.port = port
         self.sock = socket.socket()
 
-    def send(self):
-        while True:
-            msg = input()
+    def send(self, msg):
             self.sock.send(bytes(msg, encoding='utf8'))
 
-    def recv(self):
+    def recv(self, callback):
         while True:
             data = self.sock.recv(255)
             msg = data.decode(encoding='utf8')
-            print(msg)
+            # 메세지 수신 후 콜백 함수로 전달
+            callback(msg)
 
-    def communicate(self):
+    def connect(self):
         self.sock.connect(
             (self.addr, self.port)
         )
-        t_send = threading.Thread(target=self.send, daemon=True)
-        t_recv = threading.Thread(target=self.recv, daemon=True)
-        t_send.start()
-        t_recv.start()
-        while True:
-            time.sleep(1000)
-
-client = SockClient('127.0.0.1', 3000)
-client.communicate()
