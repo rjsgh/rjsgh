@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(void)
+{
+	int user[3], ball = 0, strike = 0, a[3], b = -1, i = 0, c = -1, j = 0, e = -1, r = 0;
+	a[0] = rand() % 10;
+	a[1] = rand() % 10;
+	a[2] = rand() % 10;
+
+	while (e < 2)
+		e += 1;
+	if (a[e] == 0)
+		a[e] += 1;
+	printf("%d %d %d\n", a[0], a[1], a[2]);
+	
+	while (j < 9)
+	{
+		j += 1;
+		printf("숫자를 입력해주세요 : ");
+		scanf_s("%d %d %d", &user[0], &user[1], &user[2]);
+		if (user[0] == user[1] || user[0] == user[2] || user[1] == user[2])
+		{
+			printf("다시 입력해주세요.");
+			continue;
+		}
+		while (i < 3)
+		{
+			i += 1;
+			b += 1;
+			if (a[b] == user[b])
+				strike += 1;
+			else
+			{
+				while (c < 2)
+				{
+					c += 1;
+					if (b != c)
+					{
+						if (a[b] == user[c])
+							ball += 1;
+					}
+				}
+				c = -1;
+			}
+		}
+		i = 0;
+		b = 0;
+		if (strike != 3)
+			printf("%ds %db \n", strike, ball);
+		else  if (strike == 3)
+		{
+			printf("\n이겼습니다.");
+			break;
+		}
+
+		if (9 - j != 0)
+			printf("기회 9번 중 %d번 남았습니다. \n", 9 - j);
+		else if (9 - j == 0)
+			printf("\n탈락입니다.");
+		strike = 0;
+		ball = 0;
+	}
+}
