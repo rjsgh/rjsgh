@@ -1,0 +1,128 @@
+#그래프와 인접행렬
+# 0 ------- 1
+# ㅣ\       ㅣ
+# ㅣ   \    ㅣ
+# ㅣ      \ ㅣ
+# 2 ------- 3
+# matrix = [
+#     [1, 1, 1, 1],
+#     [1, 1, 0, 1],
+#     [1, 0, 1, 1],
+#     [1, 1, 1, 1]
+# ]
+
+# DFS (깊이 우선 탐색)
+# vertex: 현재 정점, matrix: 인접 행렬, visit: 방문한 정점 표시
+# def dfs(vertex, matrix, visit):
+#     # 현재 정점을 방문했다고 표시함
+#     visit[vertex] = True
+#     print("정점", vertex, "방문")
+#     # 현재 정점에서 갈 수 있는 가능한 정점을 탐색함.
+#     # 방문 한적 없고 간선이 연결된 경우
+#     for i in range(len(matrix)):
+#         if visit[i] is False and matrix[vertex][i] == 1:
+#             dfs(i, matrix, visit)   # 재귀 호출이 발생
+
+# visit = [False] * len(matrix)
+# dfs(0, matrix, visit)
+
+# BFS (너비 우선 탐색)
+# def bfs(vertex, matrix):
+#     # 정점 방문 표시 리스트 생성
+#     visit = [False] * len(matrix)
+#     # 리스트를 큐처럼 사용
+#     q = []
+#     # 큐에 첫번째 정점을 삽입
+#     q.append(vertex)
+#     visit[vertex] = True
+#     while q:    # 큐가 비어있지 않을 때까지 탐색
+#         curr = q.pop(0)     # 큐에서 정점 하나를 거냄
+#         print("정점", curr, "방문")
+#         for i in range(len(matrix)):
+#             if visit[i] is False and matrix[curr][i] == 1:
+#                 q.append(i)
+#                 visit[i] = True
+
+# bfs(0, matrix)
+
+#프로그래머스 타겟 넘버
+numbers = [1, 1, 1, 1, 1]
+target = 3
+# def solution(numbers, target):
+#     a = [0]
+#     answer = 0
+#     while numbers:
+#         b = []
+#         v = numbers.pop()
+#         for i in a:
+#             b.append(i+v)
+#             b.append(i-v)
+#         a = b
+#         print(b)
+#         answer = b.count(target)
+#
+#     return answer
+#
+#
+# print(solution(numbers, target))
+
+#풀이
+# def dfs(curr, idx, numbers, target):
+#     # 현재 인덱스와 numbers의 길이가 같을때
+#     if idx == len(numbers):
+#         # 타겟 넘버와 같으면 1 아니면 0을 반환함.
+#         if curr == target:
+#             return 1
+#         else:
+#             return 0
+#
+#     # curr에 다음 수를 누적하여 연산하고 인덱스를 1 늘린 다음 그 결과값을 count에 누적
+#     count = dfs(curr - numbers[idx], idx + 1, numbers, target)
+#     count += dfs(curr + numbers[idx], idx + 1, numbers, target)
+#
+#     # count 반환
+#     return count
+#
+# def solution(numbers, target):
+#     return dfs(0, 0, numbers, target)
+
+#프로그래머스 네트워크
+n = 3
+computers = [[1, 1, 0], [1, 1, 0], [0, 0, 1]]
+# def dfs(vertex, computers, visit):
+#     v = 0
+#     answer = 0
+#     visit[vertex] = True
+#     v += vertex
+#     for i in range(len(computers)):
+#         if visit[i] is False and computers[vertex][i] == 1:
+#             dfs(i, computers, visit)
+#     answer += 1
+#     return answer
+# def solution(n, computers):
+#     visit = [False] * len(computers)
+#     print(dfs(0, computers, visit))
+#     # answer.append(v)
+#
+#
+#
+# solution(n, computers)
+
+# 풀이
+# node: 방문 할 네트워크 노드, visit: 방문한 네트워크 표시
+# def dfs(node, n, computers, visit):
+#     visit[node] = True
+#     for i in range(n):
+#         if not visit[i] and computers[node][i] == 1:
+#             dfs(i, n, computers, visit)
+# 
+# def solution(n, computers):
+#     visit = [False] * n
+#     answer = 0
+# 
+#     for i in range(n):
+#         if not visit[i]:
+#             dfs(i, n, computers, visit)
+#             answer += 1
+# 
+#     return answer
