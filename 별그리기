@@ -1,0 +1,52 @@
+int main(void)
+{
+	int i = 0, a = 0, j = 0, n = 0, m = 0;
+	scanf_s("%d", &a);
+	while (i < a)
+	{
+		i += 1;
+		n = i;
+		while (n < a)
+		{
+			n += 1;
+			printf(" ");
+		}
+		j = a - i;
+		while (j < a)
+		{
+			j += 1;
+			printf("*");
+		}
+		m = a - i;
+		while (m < a -1)
+		{
+			m += 1;
+			printf("*");
+		}
+		printf("\n");
+	}
+	i = 0, j = 0, n = 0, m = 0;
+	while (i < a)
+	{
+		i += 1;
+		n = a - i;
+		while (n < a)
+		{
+			n += 1;
+			printf(" ");
+		}
+		while (j < a - 1)
+		{
+			j += 1;
+			printf("*");
+		}
+		j = i;
+		while (m < a - 2)
+		{
+			m += 1;
+			printf("*");
+		}
+		m = i;
+		printf("\n");
+	}
+}
