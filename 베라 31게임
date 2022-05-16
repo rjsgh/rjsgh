@@ -1,0 +1,38 @@
+#include<stdio.h>
+int main()
+{
+	int i = 0, u_n1 = 0, u_n2 = 0, u_n3 = 0;
+	printf("끝내려면 0을 입력하세요.\n");
+	printf("1\n");
+	printf("2\n");
+	while (i < 31)
+	{
+		printf("숫자를 입력하세요: ");
+		scanf_s("%d %d", &u_n1, &u_n2);
+		if (u_n2 != 0)
+			scanf_s("%d", &u_n3);
+
+		if (u_n1 != 0 && u_n2 == 0)
+		{
+			for (i = u_n1 + 1; i <= u_n1 + 3; i++)
+			{
+				printf("%d\n", i);
+			}
+		}
+		else if (u_n1 != 0 && u_n2 != 0 && u_n3 == 0)
+		{
+			for (i = u_n2 + 1; i <= u_n2 + 2; i++)
+			{
+				printf("%d\n", i);
+			}
+		}
+		else if (u_n1 != 0 && u_n2 != 0 && u_n3 != 0)
+		{
+			for (i = u_n3 + 1; i <= u_n3 + 1; i++)
+			{
+				printf("%d\n", i);
+			}
+		}
+	}
+	printf("졌습니다.");
+}
