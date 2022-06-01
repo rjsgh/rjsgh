@@ -86,6 +86,9 @@ def get_rootdir_entry(drive_handle, rootdir_sector):
         # 삭제된 파일임
         if raw_entry[0] == 0xE5:
             continue
+        # LFN 엔트리임 (일단 무시)
+        if raw_entry[11] == 0x0F:
+            continue
 
         entry.append({
             "name": str(raw_entry[0:8], encoding="ascii"),
