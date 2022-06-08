@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<time.h>
+//디데이 프로그램
+
+//윤년인지 확인하는 함수
+int leap_year(int user_year)
+{
+	if (user_year % 4 == 0)
+	{
+		if (user_year % 100 != 0)
+			return true;
+		else if (user_year % 100 == 0)
+		{
+			if (user_year % 400 == 0)
+				return true;
+			else if (user_year % 400 != 0)
+				return false;
+		}
+	}
+	else
+		return false;
+}
+int main()
+{
+	//현재 날짜 가져오기
+	time_t timer;
+	struct tm t;
+
+	timer = time(NULL);
+
+	localtime_s(&t, &timer);
+
+	int month[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 },month_y[12] = { 31,29,31,30,31,30,31,31,30,31,30,31 }, now_year = 0, now_mon = 0, now_mday = 0;
+	now_year = t.tm_year + 1900;	//현재 년
+	now_mon = t.tm_mon + 1;			//현재 월
+	now_mday = t.tm_mday;			//현재 일
+	
+	int user_year = 0, user_mon = 0, user_mday = 0, nowday = 0, userday = 0;
+	printf("날짜를 입력하세요 (년,월,일) : ");
+	scanf_s("%d %d %d", &user_year, &user_mon, &user_mday);
+	if (now_year == user_year)
+	{
+		//윤년일때
+		if (leap_year(user_year))
+		{
+			//월 일을 일로 바꾸기
+			for (int i = 0; i <= now_mon-2; i++)
+			{
+				nowday += month_y[i];
+			}
+			nowday += now_mday;
+			for (int i = 0; i <= user_mon - 2; i++)
+			{
+				userday += month_y[i];
+			}
+			userday += user_mday;
+		}
+		//윤년이 아닐때
+		else
+		{
+			//월 일을 일로 바꾸기
+			for (int i = 0; i <= now_mon - 2; i++)
+			{
+				nowday += month[i];
+			}
+			nowday += now_mday;
+			for (int i = 0; i <= user_mon - 2; i++)
+			{
+				userday += month[i];
+			}
+			userday += user_mday;
+		}
+		//D-Day 계산
+		if (userday > nowday)
+		{
+			int d_day = 0;
+			d_day = userday - nowday;
+			printf("D-%d", d_day);
+		}
+		//D+Day 계산
+		else
+		{
+			int d_day = 0, user_op = 0;
+			printf("설정일부터 1일로 설정하시겠습니까? (1, 0) : ");
+			scanf_s("%d", &user_op);
+			switch (user_op)
+			{
+			case 1:
+			{
+				d_day = nowday - userday + 1;
+				printf("D+%d", d_day);
+				break;
+			}
+			case 0:
+			{
+				d_day = nowday - userday;
+				printf("D+%d", d_day);
+				break;
+			}
+			}
+		}
+	}
+	//유저의 년도와 현재년도가 다를때
+	else
+	{
+		printf("지원하지않는 서비스입니다.");
+	}
+}
