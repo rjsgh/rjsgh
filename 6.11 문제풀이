@@ -1,0 +1,127 @@
+#프로그래머스 42839 소수 찾기
+# from itertools import permutations
+# numbers = "171"
+# def solution(numbers):
+#     answer = 0
+#     l = 0
+#     a = 0
+#     ls = []
+#     for i in range(len(numbers)):
+#         l = list(set(["".join(p) for p in permutations(numbers, i+1)]))
+#         for j in range(len(l)):
+#             ls = []
+#             for q in range(int(l[j])):
+#                 if int(l[i]) % q == 0:
+#                     ls.append(q)
+#                 if len(ls) == 2:
+#                     answer += 1
+#     return answer
+#
+# print(solution(numbers))
+
+# 풀이
+
+# 소수 판별 함수
+# from itertools import permutations
+# numbers = "17"
+# def isPrime(n):
+#     if n < 2:
+#         return False
+#
+#     # 숫자 n의 제곱근까지만 검사하면 된다.
+#     k = int(n ** 0.5) + 1
+#
+#     for i in range(2, k):
+#         if n % i == 0:
+#             return False
+#
+#     return True
+#
+# def solution(numbers):
+#     answer = 0
+#     perm = []   # 순열 리스트
+#
+#     # numbers로 나올 수 있는 순열 구하기
+#     for i in range(1, len(numbers) + 1):
+#         # 길이가 i인 순열 구하기
+#         perm += list(permutations(numbers, i))
+#
+#     # 분리된 튜플들을 합치고 정수로 만드는 과정
+#     perm = list(set([int(''.join(i)) for i in perm]))
+#
+#     # 만들어진 순열들이 소수인지 판별
+#     for num in perm:
+#         if isPrime(num):
+#             answer += 1
+#     return answer
+#
+# print(solution(numbers))
+
+#프로그래머스 42577 전화번호 목록
+# phone_book = ["119", "97674223", "1195524421"]
+# def solution(phone_book):
+#     a = []
+#     answer = True
+#     phone_book.sort()
+#     print(phone_book)
+#     for i in range(len(phone_book)):
+#         phone_book[i].startswith()
+#
+# print(solution(phone_book))
+
+# 풀이
+# phone_book = ["119", "97674223", "1195524421"]
+# def solution(phone_book):
+#     phone_book.sort()
+#     for n1, n2 in zip(phone_book, phone_book[1:]):
+#         if len(n1) <= len(n2) and n1 == n2[:len(n1)]:
+#             return False
+#         #if n2.startswith(n1):
+#             #return False
+#     return True
+
+#프로그래머스 12945 피보나치 수
+# n = 3
+# def solution(n):
+#     answer = 0
+#     l = [0,1]
+#     for i in range(100000):
+#         l.append(l[i] + l[i + 1])
+#     return l[n] % 1234567
+# print(solution(n))
+
+# 풀이
+# def solution(n):
+#     an_2 = 0    # a(n-2)
+#     an_1 = 1    # a(n-1)
+#     an = 0      # a(n)
+#
+#     if n == 0:
+#         return an_1
+#     elif n == 1:
+#         return an_2
+#
+#     for i in range(2, n + 1):
+#         an = (an_1 + an_2) % 1234567
+#         an_2 = an_1
+#         an_1 = an
+#
+#     return an
+
+#프로그래머스 1845 폰켓몬
+# nums = [3, 3, 3, 2, 2, 2]
+# def solution(nums):
+#     a = len(nums)
+#     answer = 0
+#     nums = list(set(nums))
+#     for i in range(int(a/2)):
+#         if nums:
+#             nums.pop()
+#             answer += 1
+#     return answer
+#
+# print(solution(nums))
+
+# 풀이
+def solution(nums):
+    return min(len(set(nums)), len(nums) // 2)
