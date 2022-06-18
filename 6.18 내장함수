@@ -1,0 +1,156 @@
+#파이썬 내장 함수
+
+# int(수, base - 진법)
+
+# int 함수 추가
+# class HangulNumber:
+#     def __init__(self, hangul_num="영"):
+#         self.hangul_num = hangul_num
+#
+#     def __int__(self):
+#         num = ""
+#         for hnum in self.hangul_num:
+#             if hnum == "영":
+#                 num += "0"
+#             elif hnum == "일":
+#                 num += "1"
+#             elif hnum == "이":
+#                 num += "2"
+#             elif hnum == "삼":
+#                 num += "3"
+#             elif hnum == "사":
+#                 num += "4"
+#             elif hnum == "오":
+#                 num += "5"
+#             elif hnum == "육":
+#                 num += "6"
+#             elif hnum == "칠":
+#                 num += "7"
+#             elif hnum == "팔":
+#                 num += "8"
+#             elif hnum == "구":
+#                 num += "9"
+#             else:
+#                 raise ValueError(self.hangul_num + "은 정수로 변환할 수 없습니다.")
+#
+#         return int(num)
+#
+#     def __float__(self):
+#         # [HangulNum("삼"), HangulNumber("일오구이")
+#         num = map(HangulNumber, self.hangul_num.split("점"))
+#
+#         # ["3", "141592"]
+#         num = '.'.join(list(map(lambda x: str(int(x)), num)))
+#
+#         # 3.141592
+#         return float(num)
+#
+# kor_num = HangulNumber("칠팔구사오육일이삼영")    # 한글로 숫자 입력
+# normal_num = int(kor_num)   # 만들어진 객체를 int함수에 넘김(내부적으로 __int__ 호출)
+# print(normal_num)   # 출력: 789451230
+# kor_num = HangulNumber("삼점일사일오구이")  # 한글로 숫자 입력
+# normal_num = float(kor_num)   # 만들어진 객체를 float함수에 넘김(내부적으로 __float__ 호출)
+# print(normal_num)   # 출력: 3.141592
+
+# str 클래스 추가 정의
+# class IntegerToHangul:
+#     def __init__(self, int_num=0):
+#         self.int_num = int_num
+
+    # def __str__(self):
+    #     num = ""
+    #     for inum in str(self.int_num):
+    #         if inum == "0":
+    #             num += "영"
+    #         elif inum == "1":
+    #             num += "일"
+    #         elif inum == "2":
+    #             num += "이"
+    #         elif inum == "3":
+    #             num += "삼"
+    #         elif inum == "4":
+    #             num += "사"
+    #         elif inum == "5":
+    #             num += "오"
+    #         elif inum == "6":
+    #             num += "육"
+    #         elif inum == "7":
+    #             num += "칠"
+    #         elif inum == "8":
+    #             num += "팔"
+    #         elif inum == "9":
+    #             num += "구"
+    #         else:
+    #             raise ValueError(self.int_num + int("은 정수로 변환할 수 없습니다."))
+    #
+    #     return str(num)
+
+    # 풀이
+#     def __str__(self):
+#         kor_set = ["영", "일", "이", "삼", "사",
+#                    "오", "육", "칠", "팔", "구"]
+#
+#         num = self.int_num
+#         kor = ""
+#
+#         while num != 0:
+#             kor = kor_set[num % 10] + kor
+#             num //= 10
+#
+#         return kor
+#
+# normal_num = IntegerToHangul(12345)     # 숫자 입력
+# kor_num = str(normal_num)   # 만들어진 객체를 str함수에 넘김(내부적으로 __str__호출)
+# print(kor_num)  # 출력: 일이삼사오
+
+# 디데이
+from datetime import datetime
+
+# class MyPlan:
+#     def __init__(self, d_day):
+#         # d_day는 yyyy-MM-dd 형식의 날짜로 주어진다.
+#         self.d_day = d_day
+# 
+#     def __bool__(self):
+#         # d_day가 오늘 날짜와 같다면 True를 리턴하고 아니면 False를 리턴하도록 하는 함수
+#         now = str(datetime.today()).split()
+#         if now[0] == self.d_day:
+#             return True
+#         else:
+#             return False
+# plan = MyPlan("2022-06-18")
+# 
+# print(bool(plan))
+
+# 풀이
+# class MyPlan:
+#     def __init__(self, d_day):
+#         # d_day는 yyyy-MM-dd 형식의 날짜로 주어진다.
+#         self.d_day = d_day
+#     
+#     def __bool__(self):
+#         now = str(datetime.today()).split(" ")[0]
+#         return now == self.d_day
+    
+# 풀이 2
+#class MyPlan:
+#     def __init__(self, d_day):
+#         # d_day는 yyyy-MM-dd 형식의 날짜로 주어진다.
+#         self.d_day = d_day
+# 
+#     def __bool__(self):
+#         now = datetime.today().strftime("%Y-%m-%d")
+#         return now == self.d_day
+
+#숙제
+# 정수로 입력 받은 수는 한글로, 한글로 입력 받은 수는 정수로 변환하려고 한다. 예씨는 다음과 같다.
+class HangulStudy:
+    # 내부는 알아서 구현
+    # split으로 백, 십 나누기
+    pass
+
+a = HangulStudy("백이십삼")
+print(int(a))   # 출력: 123
+
+a = HangulStudy(123)
+print(str(a))   # 출력: "백이십삼"
