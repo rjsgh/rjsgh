@@ -1,0 +1,65 @@
+def arrange(hangul_num):
+    count = 0
+    check = 0
+    l = []
+    for i in hangul_num:
+        count += 1
+        if i == "백":
+            l.append(hangul_num[0:count])
+            check = count
+        elif i == "십":
+            l.append(hangul_num[check:count])
+            check = count
+    l.append(hangul_num[check:])
+    return l
+class HangulStudy:
+    def __init__(self, hangul_num="영"):
+        self.hangul_num = hangul_num
+
+    def __int__(self):
+        num = ""
+        kor_set = ["영", "일", "이", "삼", "사",
+                   "오", "육", "칠", "팔", "구"]
+        num_set = ["0", "1", "2", "3", "4",
+                   "5", "6", "7", "8", "9"]
+        l = arrange(self.hangul_num)
+        for i in range(len(l)):
+            if len(l[i]) == 2:
+                check = kor_set.index(l[i][0:1])
+                num += num_set[check]
+            elif len(l[i]) == 1:
+                if l[i] == "백" or l[i] == "십":
+                    num += "1"
+                else:
+                    check = kor_set.index(l[i])
+                    num += num_set[check]
+        return int(num)
+
+    def __str__(self):
+        hnum = ""
+        self.hangul_num = str(self.hangul_num)
+        kor_set = ["영", "일", "이", "삼", "사",
+                   "오", "육", "칠", "팔", "구"]
+        a = ["백", "십"]
+        if len(self.hangul_num) == 3:
+            count = -1
+        elif len(self.hangul_num) == 2:
+            count = 0
+        else:
+            count = 1
+        for i in self.hangul_num:
+            count += 1
+            if count >= 2:
+                hnum = ''.join(hnum.split("일"))
+                hnum += kor_set[int(i)]
+            else:
+                hnum += kor_set[int(i)] + a[count]
+        return str(hnum)
+
+
+
+a = HangulStudy("백이십삼")
+print(int(a))   # 출력: 123
+
+a = HangulStudy(123)
+print(str(a))   # 출력: "백이십삼"
