@@ -1,0 +1,116 @@
+#프로그래머스 12949 행렬의 곱셈
+# arr1 = [[2, 3, 2],
+#         [4, 2, 4],
+#         [3, 1, 4]]
+# arr2 = [[5, 4, 3],
+#         [2, 4, 1],
+#         [3, 1, 1]]
+# def solution(arr1, arr2):
+#     answer = []
+#     for i in range(len(arr1)):
+#         answer.append([])
+#     for x in range(len(arr2[0])):
+#         for i in range(len(arr1[0])):
+#             s = 0
+#             for j in range(len(arr1[i])):
+#                  print(arr1[x][j], arr2[j][i])
+#                  s += arr1[x][j] * arr2[j][i]
+#             print(s)
+#             answer[i].append(s)
+#     return answer
+#
+# print(solution(arr1, arr2))
+
+# 풀이
+# def solution(arr1, arr2):
+#     # arr1 은 A, arr2는 B로 설명
+#
+#     # 0으로 채워진 행렬을 먼저 생성,
+#     # 행렬 곱의 결과는 B 행렬의 행의 길이와 A 행렬의 열의 길이에 달려있다.
+#     answer = [[0 for _ in range(len(arr2[0]))] for _ in range(len(arr1))]
+#
+#     for i in range(len(arr1)):  # 열 번호
+#         for j in range(len(arr2[0])):    # B의 행 번호
+#             for k in range(len(arr1[0])):   # A의 행 번호
+#                 answer[i][j] += (arr1[i][k] * arr2[k][j])
+#     return answer
+
+#프로그래머스 42626 더 맵게
+#최소 힙
+# heap = [0]
+# def insert(n):
+#     heap.append(n)
+#     c = len(heap) - 1
+#     while c != 0:
+#         p = c // 2
+#         if heap[p] > heap[c]:
+#             heap[p], heap[c] = heap[c], heap[p]
+#         else:
+#             break
+#         c = p
+# 
+# def smallest():
+#     if len(heap) == 1:
+#         return None
+# 
+#     value = heap[1]         # 루트에서 값을 하나 가져옴
+# 
+# 
+#     last = heap.pop()    # 마지막 원소를 루트에 가져옴
+#     if len(heap) == 1:
+#         return value
+#     heap[1] = last
+# 
+#     p = 1
+#     while p * 2 <= len(heap) - 1:
+#         c0 = p * 2      # 왼쪽 자식 위치
+#         c1 = p * 2 + 1  # 오른쪽 자식 위치
+#         minc = 0        # 최소값 자식 위치
+# 
+#         # 자식 중 가장 작은 값
+#         if c1 <= len(heap) - 1:
+#             minc = c0 if heap[c0] < heap[c1] else c1
+#         else:
+#             minc = c0
+# 
+#         if heap[p] > heap[minc]:
+#             heap[p], heap[minc] = heap[minc], heap[p]
+#         else:
+#             break
+# 
+#         p = minc
+#     return value
+
+# scoville = [1, 2, 3, 9, 10, 12]
+# k = 7
+# def solution(scoville, K):
+#     answer = 0
+#     c = 0
+#     for i in scoville:
+#         insert(i)
+#     while c <= K:
+#         answer += 1
+#         c = smallest() + smallest() * 2
+#         insert(c)
+#     if len(heap) <= 1:
+#         return -1
+#     return answer
+
+# print(solution(scoville, k))
+
+# 풀이
+# import heapq
+# def solution(scoville, K):
+# 
+#     # scoville 을 최소힙으로
+#     heapq.heapify(scoville)
+# 
+#     count = 0
+#     while scoville[0] < K:
+#         x = heapq.heappop(scoville)
+#         if len(scoville) == 0:
+#             return -1
+#         y = heapq.heappop(scoville)
+#         heapq.heappush(scoville, x + y * 2)
+#         count += 1
+#     return count
