@@ -1,0 +1,345 @@
+#클래스
+# 객체를 만들어 내는 객체(리턴, 파라미터 사용 가능)
+# class MyClass:
+#     i = 12345
+#     def f(self):
+#         return 'Hello'
+#
+# print(MyClass.i)  # 12345
+# print(MyClass.f)  # <function MyClass.f at 0x000002B457D900D8>
+
+# 인스턴스화 (instantiate)
+# 인스턴스화는 클래스에 정의된 내용을 토대로 메모리에 새로운 객체를 생성하는 것.
+# 인스턴스화는 정의된 클래스 객체 식별자 뒤에 함수 호출식처럼 괄호를 붙인다.
+# x = MyClass()   # MyClass의 내용을 기반으로 새로운 MyClass 인스턴스를 생성한다.
+# (__init__에서의) self는 생성될 인스턴스.
+
+# class Complex:
+#     def __init__(self, real, imagine):
+#         self.r = real
+#         self.i = imagine
+#
+# x = Complex(3.0, -4.5)
+# print(x.r, x.i)
+
+# 데이터 속성 (data attribute)
+# x.counter = 1
+# while x.counter < 10:
+#     x.counter = x.counter * 2
+# print(x.counter)
+
+# 메서드 (method)
+# 메서드는 객체에 속한 함수다.
+
+# class MyClass:
+#     i = 12345
+#     def f(self):
+#         return 'hello'
+#
+# x = MyClass()
+# x.f()
+#
+# print(type(MyClass.f))
+# print(type(x.f))
+
+# 메서드 객체
+# 인스턴스 객체가 함수의 첫 번째 인수로 전달된다.
+
+# 클래스와 인스턴스 변수
+# 인스턴스 변수는 인스턴스별 데이터를 위한 것
+# 클래스 변수는 그 클래스의 모든 인스턴스에서 공유되는 속상과 메서드를 위한 것
+# class Dog:
+#     kind = '진돗개'    # 모든 인스턴스에서 공유되는 클래스 변수
+#
+#     def __init__(self, name):
+#         self.name = name    # 각각의 인스턴스별로 고유한 인스턴스 변수
+#
+# a = Dog("백구")
+# b = Dog("뽀삐")
+# print(a.kind == b.kind) # kind는 모든 Dog 클래스 인스턴스에서 공유한다.
+# print(a.name == b.name) # name은 각각의 인스턴스마다 고유한(입력한) 값을 가진다.
+
+# class Dog:
+#     tricks = []
+#
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def add_trick(self, trick):
+#         # 인스턴스 변수에서 속성을 찾지 못하면 클래스 변수에서 속성을 찾는다.
+#         # 여기서는 결국 Dog.tricks를 가리킨다.
+#         self.tricks.append(trick)
+
+# a = Dog("백구")
+# b = Dog("뽀삐")
+# # 아래 두 문장은 둘다 동일한 tricks에 값을 넣고있다.
+# a.add_trick("구르기")
+# b.add_trick("죽은척 하기")
+# print(a.tricks)
+
+
+# class Dog:
+#     def __init__(self, name):
+#         self.name = name
+#         self.tricks = []  # 각각의 인스턴스 묘기 목록을 직접 관리하게 한다.
+#
+#     def add_trick(self, trick):
+#         self.tricks.append(trick)
+#
+# a = Dog("백구")
+# b = Dog("뽀삐")
+# # 아래 두 문장은 둘다 동일한 tricks에 값을 넣고있다.
+# a.add_trick("구르기")
+# b.add_trick("죽은척 하기")
+# print(a.tricks)
+
+# 연습문제
+# 1. 클래스 변수와 인스턴스 변수
+# class AAA:
+#     share = 10
+#     def __init__(self, value):
+#         self.unique = value
+#
+# a = AAA(1)
+# b = AAA(2)
+# print(a == b)
+# print(a.unique == b.unique)
+# print(a.share == b.share)
+# AAA.share = 0
+# print(a.share == b.share)
+# a.share = 5
+# print(a.share == b.share)
+
+# 2. 클래스 직접 작성하기
+# class Person:
+#
+#     def __init__(self, name, number, address):
+#         self.name = name
+#         self.number = number
+#         self.address = address
+#
+#     def get_name(self):
+#         return self.name
+#
+#     def change_name(self, change):
+#         self.name = change
+#         return self.name
+#
+#     def age(self):
+#         number = self.number[:2]
+#         if int(number) <= 22:
+#             y_number = "20" + number
+#         else:
+#             y_number = "19" + number
+#
+#         return 2022 - int(y_number) + 1
+#
+#     def gender(self):
+#         number = self.number
+#         s = number.split("-")[1]
+#         if s[:1] == "1" or s[:1] == "3":
+#             return "남"
+#
+#         else:
+#             return "여"
+#
+#     def add(self):
+#         return self.address
+#
+#     def change_add(self, add):
+#         return add
+# a = Person("정건호", "060206-3", "부천시")
+# print(a.gender())
+# print(a.age())
+
+# 풀이
+# class Person:
+#     population = 0
+#
+#     def __init__(self, name, reg_number, address):
+#         self.name = name
+#         self.reg = reg_number
+#         self.addr = address
+#         Person.population += 1
+#
+#     def get_name(self):
+#         return self.name
+#
+#     def set_name(self,name):
+#         self.name = name
+#
+#     def get_age(self):
+#         front, back = self.reg.split('-')
+#         birth = 1900
+#         if back[0] in "34":
+#             birth = 2000
+#         birth += int(front[0:2])
+#         age = 2022 - birth
+#         return age
+#
+#     def get_gender(self):
+#         front, back = self.reg.split("-")
+#         if back[0] in "13":
+#             return "male"
+#         else:
+#             return "female"
+#
+#     def get_address(self):
+#         return self.addr
+#
+#     def set_address(self, addr):
+#         self.addr = addr
+#
+#     def get_population(self):
+#         return self.population
+#
+# a = Person("홍길동", "431225-1xxxxxx", "율도국")
+# b = Person("음정환", "941010-1xxxxxx", "대한민국")
+
+# 상속 (inheritance)
+# class A:
+#     def a(self):
+#         return 'a'
+#
+# class B(A):
+#     def b(self):
+#         return 'b'
+#
+# class C(B):
+#     def c(self):
+#         return 'c'
+#
+# c = C()
+# print(c.a())    # 기반 클래스를 재귀적으로 거슬러 올라가 속성을 찾는다.
+#
+# class Animal:
+#     def pattern(self):
+#         print("민무늬")
+#
+#     def sound(self):
+#         print("소리 없음")
+#
+# class Dog(Animal):
+#     def sound(self):
+#         print("멍멍")
+#
+# d = Dog()
+# d.pattern() # Animal의 pattern 속성
+# d.sound()   # dog의 sound 속성
+#
+# class Dog(Animal):
+#     def sound(self):
+#         Animal.sound(self)  # 기반 클래스의 함수에 직접 인스턴스를 전달
+#         print("멍멍")
+
+# 다중 상속
+# 여러 개의 기반 클래스를 갖는 클래스
+# class 파생_클래스_식별자(기반_클래스1, 기반_클래스2, ...):
+# 왼쪽에서 오른쪽으로, 계층 구조에서 겹치는 같은 클래스를 두 번 검색하지 않는다.
+# 깊이 우선 탐색
+
+#     변수1
+#     변수2
+#     ...
+# 함수1(self,...)
+# 함수2(self,...)
+# ...
+
+# 이터레이터 (iterator)
+# s = "abc"
+# it = iter(s)    # 컨테이너 객체로 부터 이터레이터 객체를 얻는다.
+# print(next(it)) # 이터레이터의 __next__()의 메서드를 호출한다.
+# print(next(it))
+# print(next(it))
+# print(next(it))
+
+# 이터레이터 프로토콜 메커니즘
+# class Reverse:
+#     def __init__(self, data):
+#         self.data = data
+#         self.index = len(data)
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.index == 0:
+#             raise StopIteration
+#         self.index = self.index - 1
+#         return self.data[self.index]
+#
+# rev = Reverse("Hello")
+#
+# for char in rev:
+#     print(char)
+
+# 제너레이터 (generator)
+# 일반적인 함수처럼 작성되지만 값을 돌려주고 싶을 때마다 yield 문을 사용한다.
+# 호출하면 바로 값을 반환하는 것이 아닌 이터레이터 객체를 반환한다.
+# yield를 만날때 까지 함수를 실행하고 yield 뒤에 쓰인 값을 반환한다.
+# def generator_test():
+#     yield 1
+#     yield 2
+#     yield 3
+#
+# it = generator_test()
+# print(next(it))
+# print(next(it))
+# print(next(it))
+
+# def reverse(data):
+#     for i in range(len(data)-1, -1, -1):
+#         yield data[i]
+#
+# for char in reverse('World'):
+#     print(char)
+
+# 세 종류의 값을 저장하는 클래스
+# class Value3:
+#     def __init__(self, v1, v2, v3):
+#         self.v1 = v1
+#         self.v2 = v2
+#         self.v3 = v3
+#
+#     def __iter__(self):
+#         def gen_iter():
+#             yield self.v1
+#             yield self.v2
+#             yield self.v3
+#         return gen_iter()
+#
+# value3 = Value3("문자열", 1000, ("튜플", 1))
+#
+# # 1. in 오른쪽 객체에 대한 iter 메서드 호출
+# # 2. iterator 객체에서 next 메서드 호출
+# # 3. 2번을 StopIteration 예외 발생 까지 반복
+# for i in value3:
+#     print(i)
+
+# 연산자 오버라이딩 (Operator overriding, 연산자 재정의)
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def print_name(self):
+        print(self.name)
+
+    def __add__(self, other):
+        new = Marriage(self, other)
+        return new
+
+class Marriage:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def print_familly(self):
+        print("[가족 구성]")
+        self.x.print_name()
+        self.y.print_name()
+
+a = Person("철수")
+b = Person("영희")
+# a + b -> a.__add__(b)
+m = a + b
+m.print_familly()
