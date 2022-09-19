@@ -1,0 +1,43 @@
+#include<stdio.h>
+
+void quick_sort(int arr[], int L, int R)
+{
+	int left = L, right = R;
+	int p = arr[(L + R) / 2];
+	int s;
+	while (left <= right)
+	{
+		while (arr[left] < p)
+			left++;
+		while (arr[right] > p)
+			right--;
+		if (left <= right)
+		{
+			s = arr[left];
+			arr[left] = arr[right];
+			arr[right] = s;
+			left++;
+			right--;
+		}
+		for (int i = 0; i < 7; i++)
+			printf("%d", arr[i]);
+		printf("\n");
+	}
+
+	if (L < right)
+		quick_sort(arr, L, right);
+	if (left < R)
+		quick_sort(arr, left, R);
+}
+
+int main()
+{
+	int len = 7;
+	int arr[7] = { 5,1,6,3,4,2,7 };
+	quick_sort(arr, 0, len - 1);
+
+	for (int i = 0; i < len; i++)
+		printf("%d", arr[i]);
+
+	return 0;
+}
