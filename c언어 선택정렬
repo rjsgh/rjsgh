@@ -1,0 +1,30 @@
+#include<stdio.h>
+
+void selection_sort(int arr[])
+{
+	int min = 0, s;
+	for (int i = 0; i < 7; i++)
+	{
+		min = i;
+		for (int j = i; j < 7; j++)
+		{
+			if (arr[j] < arr[min])
+				min = j;
+		}
+		s = arr[i];
+		arr[i] = arr[min];
+		arr[min] = s;
+	}
+}
+
+int main(void)
+{	
+	int arr[7] = { 5,1,6,3,4,2,7 };
+	int len = 7;
+	selection_sort(arr);
+
+	for (int i = 0; i < len; i++)
+		printf("%d", arr[i]);
+
+	return 0;
+}
