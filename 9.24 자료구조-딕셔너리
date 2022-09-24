@@ -1,0 +1,59 @@
+# # 딕셔너리
+# # 딕셔너리 생성 및 초기화
+# tel = {'jack': 4098, 'sape':4139}
+#
+# # 딕셔너리에 키-값 쌍 추가
+# tel['guido'] = 4127
+#
+# # 딕셔너리에서 키-값 쌍 제거
+# del tel['sape']
+# tel['irv'] = 4127
+#
+#
+# # list() 함수 사용
+# print(list(tel))
+# # sorted() 함수 사용
+# print(sorted(tel))
+#
+# # ㅣㅋ가 간단한 문자열일 땐, 키워드 인수를 통해 키-값 쌍을 쉽게 지정할 수 있다.
+# d = dict(sape=4139, guido=4127, jack=4089)
+
+# s = input()
+# a = 'abcdefghijklmnopqrstuvwxyz'
+# d = {x:-1 for x in a}
+# for i in s:
+#     d[i] = s.index(i)
+#
+# for i in a:
+#     print(d[i], end=' ')
+
+# 백준 파도반수열
+# N = int(input())
+# d = {x:0 for x in range(1,100)}
+# print(d)
+# for i in range(N):
+#     p = int(input())
+#     print(d[str(p)])
+
+# 풀이
+import sys
+
+# 메모이제이션을 위한 캐시 변수.
+# p1, p2, p3의 초기값을 넣는다.
+cache = {1: 1, 2: 1, 3: 1}
+
+# p의 n번째 항을 찾기 위한 재귀 함수
+def p(n):
+    # 캐시에 있는 값은 그대로 리턴.
+    if n in cache:
+        return cache[n]
+
+    # 캐시에 없으면 새로 계산함
+    cache[n] = p(n - 3) + p(n - 2)
+    return cache[n]
+
+# 정답 출력
+t = int(sys.stdin.readline())
+for _ in range(t):
+    n = int(sys.stdin.readline())
+    print(p(n))
