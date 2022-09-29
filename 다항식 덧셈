@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+struct num
+{
+	int coef[100] = {};
+	int coef2[100] =  {};
+	int exp[100] = {};
+	int exp2[100] = {};
+};
+
+struct num n1;
+int main()
+{
+	int user, maxc1, maxc2;
+	int answer[100];
+	printf("최고차항을 입력하세요: ");
+	scanf_s("%d", &user);
+	maxc1 = user;
+	for (int i = user; i >= 0; i--)
+	{
+		n1.exp[i] = i;
+		printf("x^%d의 계수를 입력하세요: ", n1.exp[i]);
+		scanf_s("%d", &n1.coef[i]);
+	}
+	printf("최고차항을 입력하세요: ");
+	scanf_s("%d", &user);
+	maxc2 = user;
+	for (int i = user; i >= 0; i--)
+	{
+		n1.exp2[i] = i;
+		printf("x^%d의 계수를 입력하세요: ", n1.exp2[i]);
+		scanf_s("%d", &n1.coef2[i]);
+	}
+	for (int i = maxc1 >= maxc2 ? maxc1: maxc2; i >= 0; i--)
+	{
+		answer[i] = n1.coef[i] + n1.coef2[i];
+		if (i == 0 && answer[i] != 0)
+			printf("%d", answer[i]);
+		else if (answer[i] != 0)
+			printf("%dx^%d+", answer[i], maxc1 >= maxc2 ? n1.exp[i] : n1.exp2[i]);
+		else
+			continue;
+	}
+}
