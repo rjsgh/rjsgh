@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+int top = -1;
+int stack[100];
+
+int Isfull()
+{
+	if (top > 100)
+		return 0;
+	else
+		return 1;
+}
+
+int Isempty()
+{
+	if (top < 0)
+		return 0;
+	else
+		return 1;
+}
+
+void push(int value)
+{
+	if (Isfull())
+		stack[++top] = value;
+	else
+		printf("스택이 가득 차 있습니다");
+}
+
+int pop()
+{
+	if (Isempty())
+		return stack[top--];
+	else
+	{
+		printf("값이 더이상 존재하지 않습니다.");
+	}
+}
+
+int main()
+{
+	printf("%d\n", pop());
+	printf("%d\n", pop());
+	printf("%d\n", pop());
+	printf("%d", pop());
+}
