@@ -1,0 +1,166 @@
+# 이진 데이터와 수의 표현
+
+# 기수법(numeral system)
+# 수를 시각적으로 나타내는 방법을 뜻한다.
+
+# 단항 기수법(unary numeral system)
+# 가장 단순하고 원시적인 기수법이다.
+# 숫자 1에 해당하는 표기만 가지고 모든 수를 표현한다.
+# 하나의 기호 배열로 모든 수를 표현하기 때문에 큰 수를 나타내기에 한계가 있다.
+
+# 명수법(sigh-value notation)
+# 단항 기수법의 단점을 보완한 방식.
+# 대표적인 예는 로마 숫자이다.
+
+# 위치값 기수법(positional system)
+# 단항 기수법과 명수법을 거쳐 등장한 기수법이다.
+# 아라비아 숫자에 근거한 10진법 위치값 기수 체계이다.
+
+# 이진법(binary)
+# 컴퓨터 안에는 전기 신호로 동작하는 스위치가 있다. (0, 1)
+# 내부에 사용되는 소자의 특성상 이진법이 편리하기 때문에 이진법 사용
+# 논리의 조립이 간단(and, or, xor) 등
+# 각각의 자리를 비트라고 부름
+
+# 이진수 -> 십진수 양의 정수 변환기
+# a = input()
+# result = 0
+# l = len(a)
+# for i in range(len(a)):
+#     l -= 1
+#     result += int(a[i])*(2**l)
+# print(result)
+
+# 풀이
+# binary = input()
+#
+# decimal = 0
+# for i, bit in enumerate(reversed(binary)):
+#     decimal += int(bit) * (2**i)
+#
+# print(decimal)
+
+# 십진수 양의 정수 -> 이진수 변환
+# num = int(input())
+# l = []
+# r = ''
+# while num > 0:
+#     r += str(num%2)
+#     num //= 2
+# for i in range(len(l), 0, -1):
+#     print(i)
+#     r = r + str(l[i])
+# print(r[::-1])
+
+# 풀이
+# decimal = int(input())
+#
+# binary = ""
+# while decimal > 0:
+#     binary += str(decimal % 2)
+#     decimal = decimal // 2
+#
+# binary = binary[::-1]
+# print(binary)
+
+# 컴퓨터의 정수 표현
+
+# 부호 절댓값(sign-magnitude)
+# 이진수의 최상위 비트를 부호 비트로 사용하고 너머지를 자연수로 표현하는 부분으로 사용
+# 하지만 컴퓨터는 이러한 방식 사용 x
+  # -> 낭비되는 수 표현이 존재한다.
+  # -> 컴퓨터에는 뺄셈 회로가 없다.
+
+# n의 보수
+
+# n-1의 보수
+# 8진수 723에 대한 8의 보수를 구하면
+# 1000 -723 = 55
+# 777 -723 = 54 + 1
+
+# 2의 보수(two's complement)
+# 중복되는 수가 없고 최상위 비트가 부호비트의 역할까지 하게 됨.
+# 대부분의 컴퓨터 시스템이 사용하는 방식
+
+# 입력받은 이진수의 2의 보수 구하기
+# user = input()
+# result = ""
+# answer = ""
+# for i in range(len(user)):
+#     if user[i] == str(0):
+#         result += str(1)
+#     else:
+#         result += str(0)
+# a = int(result[-1:]) + 1
+# if a <= 1:
+#     answer += str(a)
+# print(a)
+# print(result)
+
+# 풀이
+# binary = input()
+
+# 1의 보수를 구한다.
+# comp1 = ""
+# for bit in binary:
+#     comp1 += "1" if bit == "0" else "0"
+#
+# # 2의 보수를 구한다.
+# comp2 = ""
+# carry_bit = 1   # 올림수
+# for bit in reversed(comp1):
+#     if bit == "1" and carry_bit == 1:
+#         comp2 += "0"
+#         carry_bit = 1
+#     elif bit == "0" and carry_bit == 1:
+#         comp2 += "1"
+#         carry_bit = 0
+#     else:
+#         comp2 += bit
+# comp2 = comp2[::-1]
+#
+# print(comp2)
+
+# 이진수 -> 십진수 정수 변환기
+# def binary_to_decimal(binary):
+#     decimal = 0
+#     for i, bit in enumerate(binary[::-1]):
+#         decimal += int(bit) * (2**i)
+#     return decimal
+#
+# # 이진수의 2의 보수
+# def twos_complement(binary):
+#     comp1 = ""
+#     for bit in binary:
+#         comp1 += "1" if bit == "0" else "0"
+#
+#     comp2 = ""
+#     carry_bit = 1
+#     for bit in comp1[::-1]:
+#         if bit == "1" and carry_bit == 1:
+#             comp2 += "0"
+#         elif bit == "0" and carry_bit == 1:
+#             comp2 += "1"
+#             carry_bit = 0
+#         else:
+#             comp2 += bit
+#     return comp2[::-1]
+#
+# binary = input()
+#
+# sign = 1 # 부호
+#
+# # 최상위 비트가 1이면 2의 보수를 표현된 음수임
+# if binary[0] == "1":
+#     # 다시 2의 보수를 취하면 이진수 양수임
+#     binary = twos_complement(binary)
+#     # 부호는 음수
+#     sigh = -1
+#
+# # 이진수를 십진수로 변환
+# decimal = binary_to_decimal(binary)
+#
+# # 부호를 결정함
+# decimal = decimal * sign
+#
+# print(decimal)
