@@ -1,0 +1,66 @@
+# 백준 8979번 올림픽
+# n, k = map(int, input().split())
+# score_board = []
+# b, s, g = [], [], []
+# for i in range(int(n)):
+#     score_board.append([input().split()])
+# score_board.sort()
+# for i in range(int(n)):
+#     b.append([score_board[i][1]])
+#     s.append([score_board[i][2]])
+#     g.append([score_board[i][3]])
+# print(b)
+
+# 풀이
+# import sys
+# input = sys.stdin.readline
+#
+# # 국가 수 N, 등수를 알고 싶은 국가 K
+# n, k = map(int, input().split())
+#
+# # N 개의 메달 정보 입력
+# score_board = []
+# # 국가 K의 메달 정보
+# target_score = None
+#
+# for _ in range(n):
+#     score = list(map(int, input().split()))
+#     if score[0] == k:
+#         target_score = score
+#         continue
+#     score_board.append(score)
+#
+# # 점수판 정렬
+# score_board.sort(key=lambda x: (x[1], x[2], x[3]), reverse=True)
+#
+# # 점수판을 순회하며 국가 K의 등수 계산
+# rank = 1
+# for score in score_board:
+#     # 메달 순서대로 비교
+#     for m in range(1, 4):
+#         if target_score[m] > score[m]:
+#             break
+#         if target_score[m] < score[m]:
+#             rank += 1
+#             break
+#
+# print(rank)
+
+# 백준 2293번 동전 1
+# import sys
+# input = sys.stdin.readline
+#
+# # 동전 종류 N, 목표 금액 K 입력
+# n, k = map(int, input().split())
+#
+# # 동전의 가치 입력
+# coins = [int(input()) for _ in range(n)]
+#
+# # 초기 테이블 설정, 0원을 만드는 경우의 수 하나 고려
+# tb = [1] + [0] * k
+#
+# for coin in coins:
+#     for n in range(coin, k+1):
+#         tb[n] += tb[n-coin]
+#
+# print(tb[k])
