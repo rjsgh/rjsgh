@@ -1,0 +1,63 @@
+#include <stdio.h>
+int front = -1, rear = -1;
+int arr[4];
+int IsEmpty()
+{
+	if (rear == front)
+		return 1;
+	return 0;
+}
+int IsFull()
+{
+	if ((rear+1)%4 == front)
+	{
+		return 1;
+	}
+	return 0;
+}
+void addQ(int num)
+{
+	if (IsFull())
+		printf("큐가 가득 차 있습니다.");
+	else
+	{
+		rear = (rear + 1) % 4;
+
+		arr[rear] = num;
+	}
+}
+int deleteQ()
+{
+	if (IsEmpty() == 0)
+	{
+		front = (front + 1) % 4;
+		return arr[front];
+	}
+	printf("큐가 비어있습니다.");
+}
+void printQ()
+{
+	if (IsEmpty())
+	{
+		printf("큐가 비어있습니다.");
+		return 0;
+	}
+	for (int i = 0; i <= 3; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+int main()
+{
+	addQ(1);
+	addQ(2);
+	addQ(3);
+	addQ(4);
+	printf("%d\n", deleteQ());
+	printf("%d\n", deleteQ());
+	addQ(5);
+	printQ();
+	printf("%d\n", deleteQ());
+	printf("%d\n", deleteQ());
+}
