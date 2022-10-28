@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+int main()
+{
+	char stack[100], n;
+	int count = 0;
+	for (int i = 0; i < 1000; i++) {
+		scanf_s("%c", &n);
+		if (n == '!')
+			break;
+		if (isdigit(n))
+			printf("%c", n);
+		else if ((n == '+' || n == '-') && (stack[count - 1] == '*' || stack[count - 1] == '%')) {
+			printf("%c", stack[count - 1]);
+			stack[count - 1] = n;
+			count--;
+		}
+		else if ((n == '+' || n == '-') && stack[count - 1] == '(') {
+			stack[count] = n;
+			count --;
+		}
+		else
+			if (n != ')')
+				stack[count++] = n;
+	}
+	for (int i = count; i >= 0; i--) {
+		if ((stack[i] == '*' || stack[i] == '%'))
+			printf("%c", stack[i]);
+		else {
+			if ((stack[i] == '+' || stack[i] == '-') && stack[i - 1] == '(')
+				printf("%c.", stack[i]);
+			else if ((stack[i] == '+' || stack[i] == '-') && stack[i - 1] != '('){
+				printf("%c", stack[i]);
+			}
+		}		
+	}
+}
