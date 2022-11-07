@@ -1,0 +1,18 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+int matrix[51][51];
+void dfs(int y, int x) {
+
+}
+int main() {
+	int t, k, m, n;
+	int x, y;
+	cin >> t >> m >> n >> k;
+	for (int i = 0; i < t; i++) {
+		for (int j = 0; j < k; j++) {
+			cin >> x >> y;
+			matrix[x][y] = 1;
+		}
+	}
+}
