@@ -12,7 +12,7 @@ typedef struct _Node {
 Node* head; //가장 앞 노드 설정
 
 void init() { //초기화
-    
+    head = NULL;
 }
 
 void insert(int data) { //삽입
@@ -22,61 +22,60 @@ void insert(int data) { //삽입
     newNode->next = NULL;    // next 포인터 초기화 
 
     if (head == NULL) // empty
-        {    
-            head = newNode;
-        }
+    {
+        head = newNode;
+    }
     else // not empty, 가장 앞에 노드 추가 
-        {
+    {
         if (head->data > newNode->data) {
             newNode->next = head;
             head = newNode;
             return;
         }
         // 중간에 노드 추가 
-        for (ptr = head; ptr->next;ptr=ptr->next){
+        for (ptr = head; ; ptr = ptr->next) {
             if (ptr->data < newNode->data && ptr->next->data > newNode->data) {
                 newNode->next = ptr->next;
                 ptr->next = newNode->next;
             }
         }
 
-          // 마지막에 노드 추가  
+        // 마지막에 노드 추가  
         ptr->next = newNode;
     }
 
 }
-/*void deleteNode(int data) // 삭제
+void deleteNode(int data) // 삭제
     {
     Node* cur, * prev;
     cur = prev = head;
 
-    if (head == NULL) {    // empty 
+    if (head == NULL) {    // empty
         printf("error: list is empty!\n");
-        
+        return;
     }
 
     if (head->data == data) {    // 가장 앞의 노드 삭제
-        head->next = head;
-        head->data = NULL;
-
-        
+        head = cur->next;
+        cur = NULL;
+        return;
     }
 
-    for (                   ) {    // 중간 혹은 마지막 노드 삭제
-        if (                ) {
-            
-           
+    for (cur = head; ; cur = cur->next) {    // 중간 혹은 마지막 노드 삭제
+        if (cur->data == data) {
+            prev->next = cur->next;
+            cur->next = NULL;
+            return;
         }
-        
+
     }
 
     printf("error : there is no %d!\n", data);
-    return -1;    // 해당 데이터가 리스트에 존재하지 않음 
-}*/
+    return;    // 해당 데이터가 리스트에 존재하지 않음
+}
 int search_list(int data) {  //탐색
     Node* ptr;
-    ptr->data = head->data;
-    for (ptr->data; ptr != NULL; ptr = ptr->next) {
+    for (ptr = head; ; ptr = ptr->next) {
         if (ptr->data == data) {    // data 발견  
             return 1;
         }
@@ -86,11 +85,11 @@ int search_list(int data) {  //탐색
 }
 void printList() { //출력
     Node* ptr;
-    ptr->data = head->data;
-    for (ptr->data; ptr != NULL; ptr = ptr->next) {
-        printf("%d\n", ptr->data);
+    for (ptr=head; ; ptr = ptr->next) {
+        printf("%d ", ptr->data);
     }
-  
+    printf("\n");
+    return;
 }
 int main() {
 
@@ -100,9 +99,9 @@ int main() {
     insert(50);
     insert(200);
     printList();
-    //deleteNode(50);
+    deleteNode(50);
     printList();
-    //deleteNode(200);
+    deleteNode(200);
     printList();
 
     return 0;
