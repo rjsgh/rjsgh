@@ -33,15 +33,17 @@ void insert(int data) { //삽입
             return;
         }
         // 중간에 노드 추가 
-        for (ptr = head; ; ptr = ptr->next) {
+        for (ptr = head; ptr->next != NULL; ptr = ptr->next) {
             if (ptr->data < newNode->data && ptr->next->data > newNode->data) {
                 newNode->next = ptr->next;
                 ptr->next = newNode->next;
+                return;
             }
         }
 
         // 마지막에 노드 추가  
         ptr->next = newNode;
+        return;
     }
 
 }
@@ -61,7 +63,7 @@ void deleteNode(int data) // 삭제
         return;
     }
 
-    for (cur = head; ; cur = cur->next) {    // 중간 혹은 마지막 노드 삭제
+    for (cur = head; cur->next != NULL; cur = cur->next) {    // 중간 혹은 마지막 노드 삭제
         if (cur->data == data) {
             prev->next = cur->next;
             cur->next = NULL;
@@ -75,7 +77,7 @@ void deleteNode(int data) // 삭제
 }
 int search_list(int data) {  //탐색
     Node* ptr;
-    for (ptr = head; ; ptr = ptr->next) {
+    for (ptr = head; ptr->next != NULL; ptr = ptr->next) {
         if (ptr->data == data) {    // data 발견  
             return 1;
         }
@@ -85,7 +87,7 @@ int search_list(int data) {  //탐색
 }
 void printList() { //출력
     Node* ptr;
-    for (ptr=head; ; ptr = ptr->next) {
+    for (ptr=head; ptr->next != NULL; ptr = ptr->next) {
         printf("%d ", ptr->data);
     }
     printf("\n");
