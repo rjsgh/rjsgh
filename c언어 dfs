@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int adj[100][100];    // 인접행렬로 구현한 그래프 
+int visited[100];        // 방문 여부 체크 
+
+int DFS(int cur, int n) {
+    int i;
+    visited[cur] = 1;                       // 현재 노드 방문 체크 
+    printf("%d", cur);
+    for (i = 1; i <= n; i++) {    // 모든 인접한 노드 체크 
+        if (adj[cur][i] == 1 && visited[i] == 0) {    // 인접하고 방문하지 않은 노드라면 
+            DFS(i, n);                            //재귀함수 사용
+        }
+    }
+    return 1;
+}
+
+int main()
+{
+    int N, M, start; // 정점개수, 간선개수, 시작정점
+    int x, y; // 좌표
+
+    scanf_s("%d %d %d", &N, &M, &start);
+    for (int i = 1; i <= M; i++) { //M(간선개수) 만큼
+        scanf_s("%d %d", &x, &y);
+        adj[x][y] = 1;
+        adj[y][x] = 1; //인접행렬 만들기
+    }
+
+    //DFS 호출
+    DFS(start, N);
+
+    return 0;
+}
