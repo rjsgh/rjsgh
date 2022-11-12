@@ -1,0 +1,108 @@
+# 프로그래머스 87694 아이템 줍기
+# from collections import deque
+# # 유효한 테두리 좌표인지 검사하는 함수
+# # (좌표(x, y), 사각형 리스트(rectangle))
+# def is_boundary(point, rects):
+#     # 1. point가 어떤 rect의 범위에 속해야하고,
+#     x, y = point
+#     stat = False
+#     for rect in rects:
+#         x1, y1, x2, y2 = rect
+#         if x1 <= x <= x2 and y1 <= y <= y2:
+#             stat = True
+#             break
+#
+#     if not stat:
+#         return False
+#
+#     # 2. 그리고 point는 어떤 rect의 테두리 내부면 안됨.
+#     for rect in rects:
+#         x1, y1, x2, y2 = rect
+#         if x1 < x < x2 and y1 < y < y2:
+#             return False
+#
+#     return True
+#
+#
+# # 캐릭터 좌표, 아이템 좌표, 사각형
+# def bfs(rects, start, target):
+#     queue = deque()
+#     visit = []
+#     tx, ty = target[0], target[1]
+#     queue.appendleft(start + [0])   # 시작 좌표와 이동한 거리를 동시에 삽입
+#     visit.append(start)     # 방문 위치 기억
+#     while queue:
+#         x, y, d = queue.pop()
+#         if ((x, y) == (tx, ty)):
+#             return d
+#
+#         # offset : 내가 움직일 방향, halfset : 내가 움직일 방향이 블록 안에 있는지 확인할 값
+#         offset = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+#         halfset = [[0, 0.5], [0.5, 0], [0, -0.5], [-0.5, 0]]
+#
+#         # for i in range(len(offset)):
+#         #     nx, ny = x+offset[i][0], y+offset[i][1]
+#         #     if is_boundary(halfset[i], rects) and not visit[nx][ny]:
+#         #         queue.appendleft([x+offset[i][0], y+offset[i][1]] + [d+1])
+#         #         visit.append([nx,ny])
+#         # 풀이
+#         # next = 다음으로 움직일 위치들
+#         # halfnext = 다음으로 움직일 위치를 확인하기 위한 값
+#         next = [[x + ox, y + oy] for ox, oy in offset]
+#         halfnext = [[x + hx, y + hy] for hx, hy in halfset]
+#         for i in range(len(next)):
+#             # 다음으로 움직일 좌표가 직사각형의 선에 존재하면서 방문하지 않았을 경우
+#             if is_boundary(halfnext[i], rects) and next[i] not in visit:
+#                 queue.appendleft(next[i] + [d + 1])
+#                 visit.append(next[i])
+#
+#
+# # 0.5씩 움직이며 검사
+# def solution(rectangle, characterX, characterY, itemX, itemY):
+#     start = [characterX, characterY]
+#     target = [itemX, itemY]
+#     return bfs(rectangle, start, target)
+#
+# rectangle,characterX, characterY, itemX, itemY = [[1,1,7,4],[3,2,5,5],[4,3,6,9],[2,6,8,8]], 1, 3, 7, 8
+# print(solution(rectangle, characterX, characterY, itemX, itemY))
+
+# 프로그래머스 영어 끝말잇기 12981
+# def solution(n, words):
+#
+#     check = []
+#     cnt = 1
+#     number = 0
+#     for word in words:
+#         number += 1
+#
+#         if number == n+1:
+#             number = 1
+#             cnt += 1
+#
+#         if word in check:
+#             return [number, cnt]
+#         elif check and check[-1][-1] != word[0]:
+#             return [number, cnt]
+#
+#         check.append(word)
+#
+#     return [0, 0]
+#
+#
+# n, words = 5, ["hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"]
+# print(solution(n, words))
+
+# 풀이
+# def solution(n, words):
+#     user = [0] * n  # 각 사람들의 턴을 기록
+#     user[0] = 1 # 1번 사람부터 시작
+#
+#     for i in range(1, len(words)):  # 처음은 틀릴 수 없기 때문에 범위를 1부터 시작
+#         user[i % n] += 1    # 자신의 차례가 되면 1을 증가시킨다.
+#         # 틀리는 경우 = 이미 말했던 단어를 다시 말하거나, 끝의 단어로 시작하지 않는 단어를 말했을 경우
+#         if words[i] in words[:i] or words[i - 1][-1] != words[i][0]:
+#             answer = [i % n + 1, user[i % n]]   # 틀리면 몇번 사람이 몇번째 턴에 틀렸는지를 answer에 기록 후 반복 종료
+#             break
+#         answer = [0, 0] # 아무도 틀리지 않고 단어를 말했으면 answer에 0,0 기록
+#
+#     return answer
