@@ -4,6 +4,12 @@
 int adj[MAX][MAX]; // 인접행렬 만들때 사용
 int discovered[MAX]; // BFS_발견했는지 check
 
+typedef struct queue
+{
+    int front, rear;
+    int data[MAX];
+}queue;
+
 void BFS(int v, int N) { //방문x 그리고 이동가능한지
     
 }
