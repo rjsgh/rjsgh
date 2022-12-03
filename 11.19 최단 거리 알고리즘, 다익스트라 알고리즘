@@ -192,3 +192,50 @@
 # 
 # for i in dist[1:]:
 #     print(i if i < float('inf') else 'INF')
+
+# 백준 1504번 특정한 최단 경로 풀이
+import sys
+import heapq
+
+input = sys.stdin.readline
+inf = float('inf')
+def dijkstra(matrix, start, target):
+    distance = [inf for _ in range(len(matrix))]    # 시작 노드에서부터 각 노드 까지의 최단 거리를 담을 함수
+    check = [False for _ in range(len(matrix))]      # 방문한 노드인지 확인하는 변수
+    pq = []     # 현재 노드에서 갈 수 있는 노드들을 담을 변수
+    distance[start] = 0
+    heapq.heappush(pq, (0, start))
+
+    while pq:
+        cost, node = heapq.heappop(pq)  # 거리, 번호
+        if check[node]:
+            continue
+        check[node] = True
+        for n in range(len(matrix)):
+            n_cost = distance[node] + matrix[node][n]   # 다음 거리
+            if n_cost < distance[n]:
+                distance[n] = n_cost
+                heapq.heappush(pq,(n_cost, n))
+    print(distance)
+    return distance[target]
+
+N, E = map(int, input().split())
+matrix = [[inf] * (N+1) for _ in range(N+1)]
+
+for _ in range(E):
+    a, b, c = map(int, input().split())    # a정점에서 b정점까지의 거리 c
+    matrix[a][b] = c
+    matrix[b][a] = c
+
+v1, v2 = map(int, input().split())
+# 1번 노드 부터 N번 노드 까지의 최단 거리 단, v1과 v2를 꼭 지나야만 한다.
+# 1 --> v1 --> v2 --> N
+# 1 --> v2 --> v1 --> N
+result1 = dijkstra(matrix, 1, v1) + dijkstra(matrix, v1, v2) + dijkstra(matrix, v2, N)
+result2 = dijkstra(matrix, 1, v2) + dijkstra(matrix, v2, v1) + dijkstra(matrix, v1, N)
+result = min(result1, result2)
+if result != inf:
+  print(result)
+else:
+   print(-1)
+
