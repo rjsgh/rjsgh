@@ -1,0 +1,38 @@
+# 백준 1865 웜홀
+# import sys
+#
+# #float('inf') 대신 inf = 10001 사용
+# inf = 10001
+#
+# def bellman_ford(v, alist, start):
+#     distance = [inf] * (v+1)
+#     distance[start] = 0
+#
+#     for n in range(v):
+#         for x, y, cost in alist:
+#             if distance[y] > distance[x] + cost:
+#                 distance[y] = distance[x] + cost
+#                 if (n == v-1):
+#                     return 'YES'
+#     return 'NO'
+# # 테스트 케이스의 개수 TC 입력
+# TC = int(sys.stdin.readline())
+#
+# for _ in range(TC):
+#     # 지점의 수 N, 도로의 개수 M, 웜홀의 개수 W 입력
+#     N, M, W = map(int, sys.stdin.readline().split())
+#
+#     # 도로 정보: 연결 지점 S, E, 이동 시간(비용) T 인접 리스트 입력
+#     road = []
+#     for _ in range(M):
+#         S, E, T = map(int, sys.stdin.readline().split())
+#         road.extend([(S, E, T), (E, S, T)])   # **도로는 양방향임
+#
+#     # 웜홀 정보: 연결 지점 S, E, 줄어드는 시간(-비용) T 인접 리스트 입력
+#     wormhole = []
+#     for _ in range(W):
+#         S, E, T = map(int, sys.stdin.readline().split())
+#         wormhole.append((S, E, -T))  # 줄어들어야 하므로 T는 음수로 만듦
+#
+#     # 결과 도출: 음의 사이클이 존재하면 YES, 없으면 NO
+#     print(bellman_ford(N, road + wormhole, 1))
