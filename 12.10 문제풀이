@@ -1,0 +1,68 @@
+# 프로그래머스 142086번 가장 가까운 글자
+# def solution(s):
+#     answer = []
+#     cnt = 0
+#     for i in range(len(s)):
+#         cnt = 0
+#         answer.append(-1)
+#         for j in range(i-1, -1, -1):
+#             cnt += 1
+#             if s[i] == s[j]:
+#                 answer[i] = cnt
+#                 break
+#     return answer
+#
+# print(solution("banana"))
+
+# 풀이
+# def solution(s):
+#     answer = []
+#     for i in range(len(s)):
+#         prev = s[:i]
+#         if s[i] not in prev:
+#             answer.append(-1)
+#         else:
+#             for j in range(1, len(prev)+1):
+#                 if prev[-j] == s[i]:
+#                     answer.append(j)
+#                     break
+#     return answer
+
+# 프로그래머스 118666번 성격 유형 검사하기
+# survey, choices = ["TR", "RT", "TR"], [7, 1, 3]
+# def solution(survey, choices):
+#     answer = ''
+#     idx = -1
+#     a = [0, 3, 2, 1, 0, -1, -2, -3]
+#     result = {'RT':0,'CF':0,'JM':0,'AN':0}
+#     for i in survey:
+#         idx += 1
+#         if i in result:
+#             result[i] += a[choices[idx]]
+#         else:
+#             v = ''
+#             v += i[1] + i[0]
+#     return answer
+# print(solution(survey, choices))
+
+# 풀이
+def solution(survey, choices):
+    answer = ''
+    point = [0, -3, -2., -1, 0, 1, 2, 3]
+    # 음수와 양수로 유형을 구분
+    type = {"RT": 0, "CF": 0, "JM": 0, "AN": 0}
+
+    for i in range(len(survey)):
+        # 유형 타입에 없다면 유형 이름을 뒤집어주고, 더해줄 값도 변경해준다.
+        if survey[i] not in type:
+            type[survey[i][::-1]] += -point[choices[i]]
+        else:
+            type[survey[i]] += point[choices[i]]
+    # 최종 결과 값이 음수 또는 0이면 왼쪽 유형, 양수면 오른쪽 유형을 정답에 넣어준다.
+    for j in type:
+        if type[j] <= 0:
+            answer += j[0]
+        else:
+            answer += j[1]
+
+    return answer
